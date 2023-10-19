@@ -1,9 +1,7 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -25,6 +23,7 @@ public class Database {
         }
     }
 
+
     void getAllUsers(){
         try {
             statement = conn.prepareStatement("SELECT * FROM users");
@@ -32,19 +31,24 @@ public class Database {
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    void createNewUser(String firstName, String lastName, String email){
+    void createNewUser(String firstName, String lastName, String email, String contactNumber, String personalNumber, String address, LocalDate dob){
         try {
-            statement = conn.prepareStatement("INSERT INTO users SET firstName = ?, lastName = ?, email = ?");
+            statement = conn.prepareStatement("INSERT INTO users SET firstName = ?, lastName = ?, email = ?, contactNumber = ?, personalNumber = ?, address = ?, dob = ?");
             statement.setString(1,firstName);
             statement.setString(2,lastName);
             statement.setString(3,email);
+            statement.setString(4,contactNumber);
+            statement.setString(5,personalNumber);
+            statement.setString(6, address);
+            statement.setDate(7, Date.valueOf(dob));
             statement.executeUpdate();
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    void deleteLastAddedUser(){
+    void deleteAddedUserAsTest(String firstName){
         try{
-            statement = conn.prepareStatement("DELETE FROM users ORDER BY id DESC LIMIT 1 ");
+            statement = conn.prepareStatement("DELETE FROM users WHERE firstName = ? ");
+            statement.setString(1,firstName);
             statement.executeUpdate();
         }  catch (Exception ex) { ex.printStackTrace(); }
     }
@@ -54,13 +58,55 @@ public class Database {
         ArrayList<User> tempList = new ArrayList<User>();
         try {
             while (resultSet.next()) {
+
+                java.sql.Date date = resultSet.getDate("dob");
+                LocalDate localDate = date.toLocalDate();
                 tempList.add(new User(resultSet.getInt("id"),
                         resultSet.getString("firstName"),
                         resultSet.getString("lastName"),
-                        resultSet.getString("email")));
+                        resultSet.getString("email"),
+                        resultSet.getString("contactNumber"),
+                        resultSet.getString("personalNumber"),
+                        resultSet.getString("address"),
+                        localDate));
             }
         } catch (Exception ex){ ex.printStackTrace(); }
         return tempList;
+    }
+
+
+    public void getUserByPersonalNumber(String personalNumber){
+        try {
+            statement = conn.prepareStatement("SELECT * FROM users WHERE personalNumber = ?");
+            statement.setString(1,personalNumber);
+            resultSet = statement.executeQuery();
+            System.out.println("fetchedUser by personal no is " + resultSet);
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+
+    public User searchedUserByPersonalNumber(String personalNumber){
+       getUserByPersonalNumber(personalNumber);
+     User fetchedUser;
+     try {
+         if (resultSet.next()) {
+             java.sql.Date date = resultSet.getDate("dob");
+             LocalDate localDate = date.toLocalDate();
+             fetchedUser = new User(
+                     resultSet.getInt("id"),
+                     resultSet.getString("firstName"),
+                     resultSet.getString("lastName"),
+                     resultSet.getString("email"),
+                     resultSet.getString("contactNumber"),
+                     resultSet.getString("personalNumber"),
+                     resultSet.getString("address"),
+                     localDate);
+             return fetchedUser;
+         }
+     }
+     catch(Exception ex) {
+         ex.printStackTrace();
+     };
+        return null;
     }
 
 

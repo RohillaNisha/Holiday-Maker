@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,17 +15,24 @@ class UsersTest {
 
 
     private Users users;
+    String personalNumber = "NR1234";
 
     @BeforeEach
     public void setUp(){
         users = new Users();
     }
 
+    @AfterEach
+    public void cleanUp(){
+        users.deleteLastUser();
+    }
+
+
 
     @Test
     public void testGetTotalNumberOfUsers(){
 
-        Assertions.assertEquals(users.getTotalNumberOfUsers(), 2);
+        Assertions.assertEquals(users.getTotalNumberOfUsers(), 3);
     }
 
     @Test
@@ -42,7 +50,7 @@ class UsersTest {
 
         int initialSize = users.getTotalNumberOfUsers();
 
-        users.createUser("Rasmus", "Davidsson", "rasmus.davidsson@yahoo.com");
+        users.createUser("test", "test", "test@test.com", "987456321", "TT4212", "Staffanstorp", LocalDate.of(1968,06,07));
 
         int updatedSize = users.getTotalNumberOfUsers();
 
@@ -50,6 +58,17 @@ class UsersTest {
 
 
     }
+
+    @Test
+    public void testSearchUserByPersonalNumber(){
+
+        User fetchedUser = users.searchUserByPersonalNumber(personalNumber);
+        System.out.println("fetched test user is: "+ fetchedUser );
+        Assertions.assertEquals(fetchedUser.getPersonalNumber(), "NR1234" );
+
+    }
+
+
 
 
 

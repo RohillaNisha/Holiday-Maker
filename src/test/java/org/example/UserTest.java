@@ -3,9 +3,11 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.time.LocalDate;
+
 class UserTest {
 
-    User user = new User(1,"Raj", "Mehra", "rajMehra@gmail.com");
+    User user = new User(1,"Raj", "Mehra", "rajMehra@gmail.com", "789456123", "RM4545", "Malmö", LocalDate.of(1987,05,18));
 
     @Test
     public void getId(){

@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="322b2059-95c4-4ea1-9603-20b723027f3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/DatabaseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/UserTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/UsersTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/UserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/UsersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/UsersTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +53,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.UsersTest.testGetTotalNumberOfUsers">
+  <component name="RunManager" selected="JUnit.UsersTest.testSearchUserByPersonalNumber">
     <configuration name="UsersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HolidayMaker" />
       <extension name="coverage">
@@ -119,7 +117,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UsersTest.testGetUsersLastName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UsersTest.testSearchUserByPersonalNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HolidayMaker" />
       <extension name="coverage">
         <pattern>
@@ -129,7 +127,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example" />
       <option name="MAIN_CLASS_NAME" value="org.example.UsersTest" />
-      <option name="METHOD_NAME" value="testGetUsersLastName" />
+      <option name="METHOD_NAME" value="testSearchUserByPersonalNumber" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -137,11 +135,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UsersTest.testSearchUserByPersonalNumber" />
+        <item itemvalue="JUnit.UsersTest.testCreateUser" />
         <item itemvalue="JUnit.UsersTest.testGetTotalNumberOfUsers" />
         <item itemvalue="JUnit.UsersTest" />
-        <item itemvalue="JUnit.UsersTest.testCreateUser" />
         <item itemvalue="JUnit.UsersTest.testGetLastUsersFirstName" />
-        <item itemvalue="JUnit.UsersTest.testGetUsersLastName" />
       </list>
     </recent_temporary>
   </component>
