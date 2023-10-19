@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MenuSystemTest {
     private final MenuSystem menuSystem = MenuSystem.getInstance();
     static Stream<MenuState> menuStateProvider() {
-    return Stream.of(new MainMenu(), new PackagesMenu());
+    return Stream.of(new MainMenu("Main Menu"), new PackagesMenu("Packages Menu"));
     }
 
     @Test
@@ -39,6 +39,6 @@ class MenuSystemTest {
         MenuSystem.setActiveMenu(menu);
         MenuState activeMenu = MenuSystem.getActiveMenu();
         assertEquals(menu.getClass(), activeMenu.getClass());
-        MenuSystem.setActiveMenu(new MainMenu());
+        MenuSystem.setActiveMenu(new MainMenu("Main Menu"));
     }
 }
