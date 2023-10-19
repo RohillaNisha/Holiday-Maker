@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="322b2059-95c4-4ea1-9603-20b723027f3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu/MenuState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu/MenuSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/Menu/MenuSystemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Menu/MenuOption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/Menu/MenuOptionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -39,6 +35,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/menu" />
+                    <option name="lastUsedInstant" value="1697710045" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="devBranch" />
                     <option name="lastUsedInstant" value="1697708587" />
@@ -75,7 +75,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "devBranch",
+    "git-widget-placeholder": "feature/menu",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,7 +91,22 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MenuSystemTest">
+  <component name="RunManager" selected="JUnit.MenuOptionTest">
+    <configuration name="MenuOptionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HolidayMaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.Menu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.Menu" />
+      <option name="MAIN_CLASS_NAME" value="org.example.Menu.MenuOptionTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MenuSystemTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HolidayMaker" />
       <extension name="coverage">
@@ -102,21 +117,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example.Menu" />
       <option name="MAIN_CLASS_NAME" value="org.example.Menu.MenuSystemTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UsersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HolidayMaker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.UsersTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MenuOptionTest" />
         <item itemvalue="JUnit.MenuSystemTest" />
         <item itemvalue="JUnit.UsersTest.testSearchUserByPersonalNumber" />
         <item itemvalue="JUnit.UsersTest.testCreateUser" />
         <item itemvalue="JUnit.UsersTest.testGetTotalNumberOfUsers" />
-        <item itemvalue="JUnit.UsersTest" />
       </list>
     </recent_temporary>
   </component>
@@ -188,7 +188,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1697446792724</updated>
-      <workItem from="1697708575251" duration="1232000" />
+      <workItem from="1697708575251" duration="2496000" />
     </task>
     <servers />
   </component>
