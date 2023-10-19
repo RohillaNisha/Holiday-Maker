@@ -20,14 +20,17 @@ public class Event {
     //getter
 
     public int getEventId() {
+
         return eventId;
     }
 
     public String getEventName() {
+
         return eventName;
     }
 
     public double getEventPrice() {
+
         return eventPrice;
     }
 
@@ -35,8 +38,13 @@ public class Event {
         return packageId;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventId=" + eventId +
+                ", eventName='" + eventName + '\'' +
+                ", eventPrice=" + eventPrice +
+                ", packageId=" + packageId +
+                '}';
+    }
 }

@@ -9,7 +9,7 @@ public class Events {
     public Events() {
         this.db = new Database();
        // this.list = db.listOfAllEvents();
-       this.list= db.getAllEvents();
+       this.list= db.listOfAllEvents();
     }
 
         public String getEventName(){
@@ -22,7 +22,7 @@ public class Events {
         public void createEvent(String eventName, double eventPrice) {
         db.createNewEvent(eventName, eventPrice);
         //this.list = db.listOfAllEvents();
-            this.list=db.getAllEvents();
+            this.list=db.listOfAllEvents();
     }
 
         public void printAllEvents() {
@@ -31,5 +31,12 @@ public class Events {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Events{" +
+                "db=" + db +
+                ", list=" + list +
+                '}';
     }
+}
 
