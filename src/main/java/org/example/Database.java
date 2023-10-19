@@ -135,4 +135,28 @@ public class Database {
             resultSet = statement.executeQuery();
         } catch (Exception ex) { ex.printStackTrace(); }
     }
+
+    void createNewEvent(String eventName, double eventPrice){
+        try {
+            statement = conn.prepareStatement("INSERT INTO events SET eventName = ?, eventPrice = ?");
+            statement.setString(1,eventName);
+            statement.setDouble(2,eventPrice);
+        } catch (Exception ex) { ex.printStackTrace();
+        }
+    }
+
+    public ArrayList<Event> getAllEvents(){
+        ArrayList<Event> eventList= new ArrayList<>();
+        try{
+            statement = conn.prepareStatement("SELECT * FROM events");
+            resultSet= statement.executeQuery();
+            while (resultSet.next()){
+                Event event= new Event(resultSet.getInt("eventId"), resultSet.getString("eventName"), resultSet.getDouble("eventPrice"));
+                eventList.add(event);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return eventList;
+    }
 }
