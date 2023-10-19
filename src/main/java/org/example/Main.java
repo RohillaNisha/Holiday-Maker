@@ -11,5 +11,7 @@ public class Main {
         System.out.println(users.getTotalNumberOfUsers());
 
         users.printAllUsers();
+        db.listOfAllRooms().forEach(System.out::println);
+
     }
 }
