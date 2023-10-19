@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class Database {
@@ -25,5 +26,24 @@ public class Database {
     }
 
 
+    public ArrayList<Room> listOfAllRooms() {
+        getAllRooms();
+        ArrayList<Room> tempList = new ArrayList<Room>();
+        try {
+            while (resultSet.next()) {
+                tempList.add(new Room(resultSet.getInt("roomId"),
+                        resultSet.getInt("roomNumber"),
+                        resultSet.getString("RoomType"),
+                        resultSet.getDouble("roomPrice")));
+            }
+        } catch (Exception ex){ ex.printStackTrace(); }
+        return tempList;
+    }
 
+    private void getAllRooms() {
+        try {
+            statement = conn.prepareStatement("SELECT * FROM rooms");
+            resultSet = statement.executeQuery();
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
 }
