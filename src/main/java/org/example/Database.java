@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.booking.Booking;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.sql.Connection;
@@ -164,6 +166,39 @@ public class Database {
         } catch (Exception ex){ ex.printStackTrace(); }
         return tempList;
     }
+
+    void getAllBookings(){
+        try {
+            statement = conn.prepareStatement("SELECT * FROM bookings");
+            resultSet = statement.executeQuery();
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+
+    public ArrayList<Booking> listOfAllBookings(){
+        getAllBookings();
+        ArrayList<Booking> tempList = new ArrayList<Booking>();
+        try {
+            while (resultSet.next()) {
+                java.sql.Date bookingDate = resultSet.getDate("bookingDate");
+                java.sql.Date tripStartDate = resultSet.getDate("tripStartDate");
+                java.sql.Date tripEndDate = resultSet.getDate("tripEndDate");
+                LocalDate dateOfBooking = bookingDate.toLocalDate();
+                LocalDate dateOfTripStart = tripStartDate.toLocalDate();
+                LocalDate dateOfTripEnd = tripEndDate.toLocalDate();
+
+                tempList.add(new Booking(resultSet.getInt("bookingId"),
+                        dateOfBooking,
+                        resultSet.getBoolean("paid"),
+                        resultSet.getInt("userId"),
+                        dateOfTripStart,
+                        dateOfTripEnd,
+                        resultSet.getInt("roomId"),
+                        resultSet.getInt("noOfTravellers")));
+            }
+        } catch (Exception ex){ ex.printStackTrace(); }
+        return tempList;
+    }
+
 
 
 
