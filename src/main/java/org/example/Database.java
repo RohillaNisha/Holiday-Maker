@@ -85,7 +85,6 @@ public class Database {
             statement = conn.prepareStatement("SELECT * FROM users WHERE personalNumber = ?");
             statement.setString(1,personalNumber);
             resultSet = statement.executeQuery();
-            System.out.println("fetchedUser by personal no is " + resultSet);
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
@@ -165,6 +164,8 @@ public class Database {
         } catch (Exception ex){ ex.printStackTrace(); }
         return tempList;
     }
+
+
 
 
 }
