@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

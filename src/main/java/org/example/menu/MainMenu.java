@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 import org.example.Database;
 import org.example.User;
