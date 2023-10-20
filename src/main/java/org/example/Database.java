@@ -141,22 +141,30 @@ public class Database {
             statement = conn.prepareStatement("INSERT INTO events SET eventName = ?, eventPrice = ?");
             statement.setString(1,eventName);
             statement.setDouble(2,eventPrice);
+            statement.executeUpdate();
         } catch (Exception ex) { ex.printStackTrace();
         }
     }
 
-    public ArrayList<Event> getAllEvents(){
-        ArrayList<Event> eventList= new ArrayList<>();
-        try{
+    void getAllEvents(){
+        try {
             statement = conn.prepareStatement("SELECT * FROM events");
-            resultSet= statement.executeQuery();
-            while (resultSet.next()){
-                Event event= new Event(resultSet.getInt("eventId"), resultSet.getString("eventName"), resultSet.getDouble("eventPrice"));
-                eventList.add(event);
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return eventList;
+            resultSet = statement.executeQuery();
+        } catch (Exception ex) { ex.printStackTrace(); }
     }
+
+    public ArrayList<Event> listOfAllEvents(){
+        getAllEvents();
+        ArrayList<Event> tempList = new ArrayList<Event>();
+        try {
+            while (resultSet.next()) {
+                tempList.add(new Event(resultSet.getInt("eventId"),
+                        resultSet.getString("eventName"),
+                        resultSet.getDouble("eventPrice")));
+            }
+        } catch (Exception ex){ ex.printStackTrace(); }
+        return tempList;
+    }
+
+
 }
