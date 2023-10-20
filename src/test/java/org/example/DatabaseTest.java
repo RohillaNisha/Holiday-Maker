@@ -64,7 +64,7 @@ class DatabaseTest {
 
         boolean eventFound = false;
         for (Event event : events) {
-            if (event.getEventName() == "Concert") {
+            if (event.getEventName().equals("Concert")) {
                 eventFound = true;
                 break;
             }
