@@ -1,4 +1,4 @@
-package org.example.Menu;
+package org.example.menu;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
