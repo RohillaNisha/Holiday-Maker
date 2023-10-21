@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Database {
@@ -136,6 +137,56 @@ public class Database {
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
+    public ArrayList<Package> listOfAllPackages() {
+            getAllPackages();
+        ArrayList<Package> packageList1 = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                packageList1.add(new Package(resultSet.getInt("packageId"),
+                        resultSet.getString("packageType"),
+                        resultSet.getString("packageName")));
+            }
+        } catch (Exception ex) {ex.printStackTrace();
+        }
+        return packageList1;
+    }
+    private void getAllPackages(){
+        try{
+            statement = conn.prepareStatement("SELECT * FROM packages");
+            resultSet= statement.executeQuery();
+
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+/*
+    public List<Package> getAllPackages(){
+            ArrayList<Package> packageList = new ArrayList<>();
+        try{
+            statement = conn.prepareStatement("SELECT * FROM packages");
+            resultSet= statement.executeQuery();
+            while (resultSet.next()) {
+                Package package = new Package((resultSet.getInt("packageId")),resultSet.getString("packageType"), resultSet.getString("packageName"));
+                packageList.add(package);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return packageList;
+
+    }
+
+ */
+    public void createNewPackage( int packageId, String packageType, String packageName) {
+        try {
+            statement = conn.prepareStatement("INSERT INTO packages SET packageId = ?, packageName = ?, eventPrice = ?");
+            statement.setInt(1,packageId);
+            statement.setString(2,packageType);
+
+            statement.setString(3,packageName);
+        } catch (Exception ex) { ex.printStackTrace();
+        }
+    }
+
     void createNewEvent(String eventName, double eventPrice){
         try {
             statement = conn.prepareStatement("INSERT INTO events SET eventName = ?, eventPrice = ?");
@@ -159,4 +210,11 @@ public class Database {
         }
         return eventList;
     }
+
+
+
+    // Lägg dina packages saker här REINE!!
+
+
+
 }

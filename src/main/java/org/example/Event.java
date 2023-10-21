@@ -34,9 +34,16 @@ public class Event {
     public int getPackageId() {
         return packageId;
     }
+// Reine har lagt till toSTing
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventId=" + eventId +
+                ", eventName='" + eventName + '\'' +
+                ", eventPrice=" + eventPrice +
+                ", packageId=" + packageId +
+                '}';
+    }
 }
