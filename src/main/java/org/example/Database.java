@@ -1,4 +1,3 @@
-
 package org.example;
 
 import java.sql.*;
@@ -147,7 +146,8 @@ public class Database {
                         resultSet.getInt("roomId"),
                         resultSet.getInt("roomNumber"),
                         resultSet.getString("RoomType"),
-                        resultSet.getDouble("roomPrice")));
+                        resultSet.getDouble("roomPrice"),
+                        resultSet.getInt("roomCapacity")));
       }
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -200,13 +200,14 @@ public class Database {
     }
   }
 
-  public  List<Event> listOfEventsByStartDate(Date startDate){
+  public  List<Event> listOfEventsByStartDate(Date startDate, Date endDate){
 
-      List<Event> eventList = new ArrayList<>();
+    List<Event> eventList = new ArrayList<>();
 
     try{
-      statement = conn.prepareStatement(" SELECT * FROM events WHERE startDate= ? ");
+      statement = conn.prepareStatement(" SELECT * FROM events WHERE startDate >= ? && endDate <= ?");
       statement.setDate(1, startDate);
+      statement.setDate(2, endDate);
       resultSet = statement.executeQuery();
       while (resultSet.next()) {
         Event event = createEventFromResultSet(resultSet);
@@ -497,5 +498,3 @@ public class Database {
 
 
 }
-
-
