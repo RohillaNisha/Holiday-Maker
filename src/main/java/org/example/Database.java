@@ -177,19 +177,18 @@ public class Database {
 
   public ArrayList<Event> listOfAllEvents() {
     getAllEvents();
-    ArrayList<Event> tempList = new ArrayList<Event>();
+    ArrayList<Event> eventList = new ArrayList<Event>();
     try {
       while (resultSet.next()) {
-        tempList.add(
-                new Event(
-                        resultSet.getInt("eventId"),
-                        resultSet.getString("eventName"),
-                        resultSet.getDouble("eventPrice")));
+        Event event = createEventFromResultSet(resultSet);
+        eventList.add(event);
       }
-    } catch (Exception ex) {
-      ex.printStackTrace();
+      return eventList;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
     }
-    return tempList;
   }
 
   void getAllEvents() {
@@ -199,6 +198,45 @@ public class Database {
     } catch (Exception ex) {
       ex.printStackTrace();
     }
+  }
+
+  public  List<Event> listOfEventsByStartDate(Date startDate){
+
+      List<Event> eventList = new ArrayList<>();
+
+    try{
+      statement = conn.prepareStatement(" SELECT * FROM events WHERE startDate= ? ");
+      statement.setDate(1, startDate);
+      resultSet = statement.executeQuery();
+      while (resultSet.next()) {
+        Event event = createEventFromResultSet(resultSet);
+        eventList.add(event);
+      }
+      return eventList;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+
+  }
+
+  public Event createEventFromResultSet(ResultSet resultSet) throws SQLException {
+    if (resultSet == null) {
+      return null;
+    }
+
+    Event event =
+            new Event(
+                    resultSet.getString("eventName"),
+                    resultSet.getDouble("eventPrice"),
+                    resultSet.getInt("packageId"),
+                    resultSet.getDate("startDate").toLocalDate(),
+                    resultSet.getDate("endDate").toLocalDate());
+
+    event.setEventId(resultSet.getInt(1));
+
+    return event;
   }
 
   int createNewBooking(

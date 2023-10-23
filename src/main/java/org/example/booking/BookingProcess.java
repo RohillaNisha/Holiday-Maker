@@ -2,18 +2,21 @@ package org.example.booking;
 import org.example.Database;
 import org.example.Event;
 import org.example.User;
+
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookingProcess {
 
     private static Database db = new Database();
 
-     Scanner input = new Scanner(System.in);
+     static Scanner input = new Scanner(System.in);
 
-     public void createABooking(){
+     public static void createABooking(){
 
          System.out.println("Enter customer's personal number: ");
          String personalNumber = input.nextLine();
@@ -26,18 +29,29 @@ public class BookingProcess {
          LocalDate startDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
          System.out.println("Enter end date for your trip: (yyyy-mm-dd) ");
          LocalDate endDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-
+         searchEventsByStartDate(startDate);
 
      }
 
-     public User searchUserByPersonalNumber(String personalNumber){
+     public static User searchUserByPersonalNumber(String personalNumber){
          User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
          return fetchedUser;
      }
 
-     public ArrayList<Event> searchEventsByStartDate(LocalDate startDate){
+     public static ArrayList<Event> searchEventsByStartDate(LocalDate startDate){
+
+         List<Event> listOfEventsFetched = db.listOfEventsByStartDate(Date.valueOf(startDate));
+         displayFetchedEvents(listOfEventsFetched);
+
 
      }
 
+     public static void displayFetchedEvents(List<Event> eventList){
+         for(Event event: eventList){
+
+             System.out.println(eventList.iterator() + " " + event.getEventId() + " " + event.getEventName() +  " " + event.getStartDate() );
+         }
+
+     }
 
 }

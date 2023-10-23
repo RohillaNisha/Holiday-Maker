@@ -1,27 +1,47 @@
 package org.example;
 
+import java.time.LocalDate;
+
 public class Event {
     private int eventId;
     private String eventName;
     private double eventPrice;
     private int packageId;
 
+    private LocalDate startDate;
+    private LocalDate endDate;
+
 
     //constructor
 
 
-    public Event(int eventId, String eventName, double eventPrice) {
-        this.eventId = eventId;
+    public Event( String eventName, double eventPrice, int packageId, LocalDate startDate, LocalDate endDate) {
         this.eventName = eventName;
         this.eventPrice = eventPrice;
         this.packageId = packageId;
+        this.endDate = endDate;
+        this.startDate = startDate;
     }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+
 
     //getter
 
     public int getEventId() {
 
         return eventId;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
     public String getEventName() {
