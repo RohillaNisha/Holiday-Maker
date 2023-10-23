@@ -8,7 +8,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Database {
@@ -90,6 +89,8 @@ public class Database {
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
+
+
     public User searchedUserByPersonalNumber(String personalNumber){
        getUserByPersonalNumber(personalNumber);
      User fetchedUser;
@@ -137,55 +138,6 @@ public class Database {
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    public ArrayList<Package> listOfAllPackages() {
-            getAllPackages();
-        ArrayList<Package> packageList1 = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                packageList1.add(new Package(resultSet.getInt("packageId"),
-                        resultSet.getString("packageType"),
-                        resultSet.getString("packageName")));
-            }
-        } catch (Exception ex) {ex.printStackTrace();
-        }
-        return packageList1;
-    }
-    private void getAllPackages(){
-        try{
-            statement = conn.prepareStatement("SELECT * FROM packages");
-            resultSet= statement.executeQuery();
-
-        } catch (Exception ex) {ex.printStackTrace();}
-    }
-/*
-    public List<Package> getAllPackages(){
-            ArrayList<Package> packageList = new ArrayList<>();
-        try{
-            statement = conn.prepareStatement("SELECT * FROM packages");
-            resultSet= statement.executeQuery();
-            while (resultSet.next()) {
-                Package package = new Package((resultSet.getInt("packageId")),resultSet.getString("packageType"), resultSet.getString("packageName"));
-                packageList.add(package);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-
-        }
-        return packageList;
-
-    }
-
- */
-    public void createNewPackage( int packageId, String packageType, String packageName) {
-        try {
-            statement = conn.prepareStatement("INSERT INTO packages SET packageId = ?, packageName = ?, eventPrice = ?");
-            statement.setInt(1,packageId);
-            statement.setString(2,packageType);
-
-            statement.setString(3,packageName);
-        } catch (Exception ex) { ex.printStackTrace();
-        }
-    }
 
     void createNewEvent(String eventName, double eventPrice){
         try {
@@ -213,8 +165,91 @@ public class Database {
 
 
 
-    // Lägg dina packages saker här REINE!!
+    // Lägg dina packages saker här REINE
 
+    public ArrayList<Package> listOfAllPackages() {
+        getAllPackages();
+        ArrayList<Package> packageList1 = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                packageList1.add(new Package(resultSet.getInt("packageId"),
+                        resultSet.getString("packageType"),
+                        resultSet.getString("packageName")));
+            }
+        } catch (Exception ex) {ex.printStackTrace();
+        }
+        return packageList1;
+    }
+    private void getAllPackages(){
+        try{
+            statement = conn.prepareStatement("SELECT * FROM packages");
+            resultSet= statement.executeQuery();
+
+        } catch (Exception ex) {ex.printStackTrace();}
+    }
+    public void getPackageByPackageType(String packageType) {
+        try {
+            statement = conn.prepareStatement("SELECT * FROM packages WHERE packageType = ?");
+            statement.setString(1,packageType);
+            resultSet = statement.executeQuery();
+            //System.out.println("The fetchedPackage by packageType is " + resultSet);
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+
+
+    public Package fetchedPackageByPackageType(String packageType){
+        getPackageByPackageType(packageType);
+        Package fetchedPackage;
+        try{
+            if (resultSet.next()) {
+                fetchedPackage = new Package(
+                        resultSet.getInt("packageId"),
+                        resultSet.getString("packageType"),
+                        resultSet.getString("packageName")
+                );
+                return fetchedPackage;
+            }
+
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return null;
+    }
+    public void getPackageByPackageName(String packageName) {
+        try {
+            statement = conn.prepareStatement("SELECT * FROM packages WHERE packageName = ?");
+            statement.setString(1,packageName);
+            resultSet = statement.executeQuery();
+            //System.out.println("The fetchedPackage by packageName is " + resultSet);
+        } catch (Exception ex) { ex.printStackTrace(); }
+    }
+
+
+    public Package fetchedPackageByPackageName(String packageName){
+        getPackageByPackageName(packageName);
+        Package fetchedPackage;
+        try{
+            if (resultSet.next()) {
+                fetchedPackage = new Package(
+                        resultSet.getInt("packageId"),
+                        resultSet.getString("packageType"),
+                        resultSet.getString("packageName")
+                );
+                return fetchedPackage;
+            }
+
+        } catch (Exception ex) { ex.printStackTrace(); }
+        return null;
+    }
+
+    public void createNewPackage( int packageId, String packageType, String packageName) {
+        try {
+            statement = conn.prepareStatement("INSERT INTO packages SET packageId = ?, packageName = ?, eventPrice = ?");
+            statement.setInt(1,packageId);
+            statement.setString(2,packageType);
+
+            statement.setString(3,packageName);
+        } catch (Exception ex) { ex.printStackTrace();
+        }
+    }
 
 
 }

@@ -22,8 +22,6 @@ public class Main {
         packages.printAllPackages();
 
         System.out.println("Number of packages " + packages.getTotalNumberOfPackages());
-
-
         db.listOfAllPackages().forEach(System.out::println);
 
 

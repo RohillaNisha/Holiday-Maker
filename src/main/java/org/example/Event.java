@@ -34,7 +34,6 @@ public class Event {
     public int getPackageId() {
         return packageId;
     }
-// Reine har lagt till toSTing
 
 
     @Override

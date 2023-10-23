@@ -12,14 +12,10 @@ public class Packages {
     public Packages() {
         this.db = new Database();
         this.list1 = db.listOfAllPackages();
-
     }
     public int getTotalNumberOfPackages() {
         return this.list1.size();
-
     }
-
-
     public int getPackageId() {
         return this.list1.get(1).getPackageId();
     }
@@ -42,11 +38,21 @@ public class Packages {
         }
     }
 
+    // Methods  Packages
+
+ public Package fetchPackageByPackageType(String packageType){
+        Package fetchedPackage1 = db.fetchedPackageByPackageType("ADVENTURE");
+     //System.out.println("The fetched package is: " + fetchedPackage1);
+     return fetchedPackage1;
+ }
+    public Package fetchPackageByPackageName(String packageName){
+        Package fetchedPackage2 = db.fetchedPackageByPackageName("Explore culture Skåne");
+        //System.out.println("The fetched package is: " + fetchedPackage2);
+        return fetchedPackage2;
+    }
 
 
 
-
-    // Metoder vi ska ha gällande Packages
 
 
 }
