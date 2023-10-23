@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="322b2059-95c4-4ea1-9603-20b723027f3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/Bookings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/menu/MainMenuTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

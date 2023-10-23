@@ -28,7 +28,7 @@ public class BookingProcess {
          LocalDate startDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
          System.out.println("Enter end date for your trip: (yyyy-mm-dd) ");
          LocalDate endDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-         
+
 
      }
 
