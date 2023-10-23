@@ -20,14 +20,17 @@ public class Event {
     //getter
 
     public int getEventId() {
+
         return eventId;
     }
 
     public String getEventName() {
+
         return eventName;
     }
 
     public double getEventPrice() {
+
         return eventPrice;
     }
 
