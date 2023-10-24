@@ -3,6 +3,7 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,10 +90,11 @@ class DatabaseTest {
     int travelersNo = 2;
     double totalPrice = 200.0;
     List<Integer> roomIds = Arrays.asList(1, 2, 3);
+    List<Integer> eventIds = Arrays.asList(1, 2, 3);
 
     int bookingId =
-        db.createNewBooking(
-            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds);
+    db.createNewBooking(
+            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds, eventIds);
 
     assertEquals(-1, bookingId);
   }
@@ -202,4 +204,19 @@ class DatabaseTest {
 
     assertNotEquals(1, bookingId);
   }
+
+  @Test
+  void testListOfEventsByStartDate(){
+    Date startDate = Date.valueOf("2023-11-11");
+    Date endDate = Date.valueOf("2023-11-11");
+
+    List<Event> eventsList = db.listOfEventsByStartDate(startDate, endDate);
+
+    int eventsInEventsList = eventsList.size();
+
+    Assertions.assertEquals(1,eventsInEventsList);
+
+  }
+
+
 }
