@@ -521,7 +521,6 @@ public class Database {
               statment.addBatch();
             }
             statment.executeBatch();
-            //return bookingId;
 
           } catch (SQLException e) {
             e.printStackTrace();
@@ -557,7 +556,7 @@ public class Database {
   public Booking getBookingWithDetails(int bookingId) {
     Booking booking = null;
     List<Integer> roomIds = new ArrayList<>();
-    List<Integer> eventIds = new ArrayList();
+    List<Integer> eventIds = new ArrayList<>();
     String userName;
     int userId;
 

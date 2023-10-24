@@ -75,16 +75,12 @@ public class BookingProcess {
             totalPrice,
             selectedRoomIds,
             selectedEventIds);
-    selectedRoomIds = new ArrayList<>();
-    selectedEventIds = new ArrayList<>();
-    selectedEvents = new ArrayList<>();
-    roomListPickedByUser = new ArrayList<>();
-    totalPrice = 0;
+    reset();
 
     System.out.println("Booking is done with booking id: " + id);
   }
 
-  public User searchUserByPersonalNumber(String personalNumber) {
+  private User searchUserByPersonalNumber(String personalNumber) {
     User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
     return fetchedUser;
   }
@@ -95,7 +91,7 @@ public class BookingProcess {
     return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
   }
 
-  public List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
+  private List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
 
     availableEvents = db.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
     displayFetchedEvents(availableEvents);
@@ -135,7 +131,7 @@ public class BookingProcess {
     }
   }
 
-  public void displayFetchedEvents(List<Event> eventList) {
+  private void displayFetchedEvents(List<Event> eventList) {
     System.out.println("No. Event id         Date       Price    Event name");
     for (int i = 0; i < eventList.size(); i++) {
 
@@ -153,7 +149,7 @@ public class BookingProcess {
     }
   }
 
-  public void calculateTotalPrice(int noOfTravelers){
+  private void calculateTotalPrice(int noOfTravelers){
     for(Event event : selectedEvents){
       totalPrice += event.getEventPrice() * noOfTravelers;
     }
@@ -182,5 +178,13 @@ public class BookingProcess {
       db.updateBooking(booking.getBookingId(), "paid", false);
       System.out.println("Booking is now unpaid");
     }
+  }
+
+  private void reset(){
+    selectedRoomIds = new ArrayList<>();
+    selectedEventIds = new ArrayList<>();
+    selectedEvents = new ArrayList<>();
+    roomListPickedByUser = new ArrayList<>();
+    totalPrice = 0;
   }
 }
