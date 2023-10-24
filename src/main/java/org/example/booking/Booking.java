@@ -6,8 +6,9 @@ import java.util.List;
 
 public class Booking {
   private final LocalDate bookingDate;
-  private final boolean paid;
+  private boolean paid;
   private final int userId;
+  private String userName;
   private final LocalDate tripStartDate;
   private final LocalDate tripEndDate;
   private final int noOfTravellers;
@@ -38,6 +39,10 @@ public class Booking {
   public void setRoomIds(List<Integer> roomIds) {
 
     this.roomIds = roomIds;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public int getBookingId() {
@@ -80,15 +85,6 @@ public class Booking {
     return packageId;
   }
 
-  public void setPackageId(int packageId) {
-
-    this.packageId = packageId;
-  }
-
-  public List<Integer> getEventIds() {
-    return eventIds;
-  }
-
   public void setEventIds(List<Integer> eventIds) {
     this.eventIds = eventIds;
   }
@@ -101,8 +97,8 @@ public class Booking {
         + bookingDate
         + ", paid="
         + paid
-        + ", userId="
-        + userId
+        + ", userName="
+        + userName
         + ", tripStartDate="
         + tripStartDate
         + ", tripEndDate="

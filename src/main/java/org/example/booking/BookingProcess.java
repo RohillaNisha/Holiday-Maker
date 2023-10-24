@@ -14,13 +14,14 @@ import org.example.User;
 public class BookingProcess {
 
   private final Database db = new Database();
-  private final List<Event> selectedEvents = new ArrayList<>();
-  private final List<Room> roomListPickedByUser = new ArrayList<>();
+  private List<Event> selectedEvents = new ArrayList<>();
+  private List<Room> roomListPickedByUser = new ArrayList<>();
   private List<Integer> selectedRoomIds = new ArrayList<>();
   private final LocalDate currentDate = LocalDate.now();
   private List<Integer> selectedEventIds = new ArrayList<>();
-   Scanner input = new Scanner(System.in);
+  Scanner input = new Scanner(System.in);
   private List<Event> availableEvents;
+  private double totalPrice = 0;
   private List<Room> allRooms;
 
   public void createABooking() {
@@ -61,20 +62,26 @@ public class BookingProcess {
       selectRooms();
     }
 
+    calculateTotalPrice(noOfTravelers);
+
     int id =
         db.createNewBooking(
             currentDate,
-            true,
+            false,
             fetchedUser.getId(),
             startDate,
             endDate,
             noOfTravelers,
-            1500.0,
+            totalPrice,
             selectedRoomIds,
-                selectedEventIds);
+            selectedEventIds);
     selectedRoomIds = new ArrayList<>();
     selectedEventIds = new ArrayList<>();
-    System.out.println(db.getBookingWithDetails(id));
+    selectedEvents = new ArrayList<>();
+    roomListPickedByUser = new ArrayList<>();
+    totalPrice = 0;
+
+    System.out.println("Booking is done with booking id: " + id);
   }
 
   public User searchUserByPersonalNumber(String personalNumber) {
@@ -143,6 +150,37 @@ public class BookingProcess {
               + eventList.get(i).getEventPrice()
               + " "
               + eventList.get(i).getEventName());
+    }
+  }
+
+  public void calculateTotalPrice(int noOfTravelers){
+    for(Event event : selectedEvents){
+      totalPrice += event.getEventPrice() * noOfTravelers;
+    }
+    for(Room room : roomListPickedByUser){
+      totalPrice += room.getRoomPrice();
+    }
+  }
+
+  public void findABooking(){
+    int bookingIdForSearch = getUserInputInt("Enter your booking id: ");
+    input.nextLine();
+    System.out.println(db.getBookingWithDetails(bookingIdForSearch));
+
+  }
+
+  public void changePaidStatus(){
+    int bookingIdForSearch = getUserInputInt("Enter your booking id: ");
+    Booking booking = db.getBookingWithDetails(bookingIdForSearch);
+    System.out.println(booking);
+    int userInput = getUserInputInt("Click 1 to make it paid. Click 2 to make it unpaid");
+    input.nextLine();
+    if(userInput == 1){
+      db.updateBooking(booking.getBookingId(), "paid", true);
+      System.out.println("Booking is now paid");
+    }else {
+      db.updateBooking(booking.getBookingId(), "paid", false);
+      System.out.println("Booking is now unpaid");
     }
   }
 }

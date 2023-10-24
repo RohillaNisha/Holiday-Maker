@@ -312,7 +312,7 @@ public class Database {
     }
   }
 
-  Booking updateBooking(int bookingId, String columnName, Object updatedValue) {
+  public Booking updateBooking(int bookingId, String columnName, Object updatedValue) {
     try {
       String updateQuery = "UPDATE bookings SET " + columnName + " = ? WHERE bookingId = ?";
       statement = conn.prepareStatement(updateQuery);
@@ -344,7 +344,7 @@ public class Database {
     }
   }
 
-  Booking getBooking(int bookingId) {
+  public Booking getBooking(int bookingId) {
     try {
       statement = conn.prepareStatement("SELECT * FROM bookings WHERE bookingId = ?");
       statement.setInt(1, bookingId);
@@ -558,6 +558,8 @@ public class Database {
     Booking booking = null;
     List<Integer> roomIds = new ArrayList<>();
     List<Integer> eventIds = new ArrayList();
+    String userName;
+    int userId;
 
     try {
       PreparedStatement bookingStatement = conn.prepareStatement("SELECT * FROM bookings WHERE bookingId = ?");
@@ -566,6 +568,15 @@ public class Database {
 
       if (bookingResultSet.next()) {
         booking = createBookingFromResultSet(bookingResultSet);
+
+        userId = booking.getUserId();
+        PreparedStatement userStatement = conn.prepareStatement("SELECT firstName, lastName FROM users WHERE id = ?");
+        userStatement.setInt(1, userId);
+        ResultSet userNameResultSet = userStatement.executeQuery();
+        if(userNameResultSet.next()){
+          userName = userNameResultSet.getString("firstName") + " " + userNameResultSet.getString("lastName");
+          booking.setUserName(userName);
+        }
 
         PreparedStatement roomStatement = conn.prepareStatement("SELECT roomId FROM reservations WHERE bookingId = ?");
         roomStatement.setInt(1, bookingId);
@@ -584,6 +595,7 @@ public class Database {
           eventIds.add(eventResultSet.getInt("eventId"));
         }
         booking.setEventIds(eventIds);
+
       }
     } catch (SQLException e) {
       e.printStackTrace();

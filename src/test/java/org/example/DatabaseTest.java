@@ -194,10 +194,11 @@ class DatabaseTest {
     int travelersNo = 2;
     double totalPrice = 1500.0;
     List<Integer> roomIds = Arrays.asList(1, 2, 3);
+    List<Integer> eventIds = Arrays.asList(1, 2, 3);
 
     int bookingId =
         db.createNewBooking(
-            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds);
+            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds, eventIds);
 
     assertNotEquals(1, bookingId);
   }

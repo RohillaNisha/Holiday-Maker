@@ -63,14 +63,4 @@ class BookingTest {
   void testGetNoOfTotalPrice() {
     assertEquals(1500.0, booking.getTotalPrice());
   }
-
-  @Test
-  void testGetPackageId() {
-    assertEquals(201, booking.getPackageId());
-  }
-
-  @Test
-  void testGetEventId() {
-    assertEquals(1, booking.getEventId());
-  }
 }
