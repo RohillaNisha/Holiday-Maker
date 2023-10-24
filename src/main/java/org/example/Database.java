@@ -22,8 +22,8 @@ public class Database {
   void connectToDb() {
     try {
       conn =
-              DriverManager.getConnection(
-                      "jdbc:mysql://161.97.144.27:8012/holidayMaker?user=root&password=practicespiderclimb&serverTimezone=UTC");
+          DriverManager.getConnection(
+              "jdbc:mysql://161.97.144.27:8012/holidayMaker?user=root&password=practicespiderclimb&serverTimezone=UTC");
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -31,17 +31,17 @@ public class Database {
   }
 
   void createNewUser(
-          String firstName,
-          String lastName,
-          String email,
-          String contactNumber,
-          String personalNumber,
-          String address,
-          LocalDate dob) {
+      String firstName,
+      String lastName,
+      String email,
+      String contactNumber,
+      String personalNumber,
+      String address,
+      LocalDate dob) {
     try {
       statement =
-              conn.prepareStatement(
-                      "INSERT INTO users SET firstName = ?, lastName = ?, email = ?, contactNumber = ?, personalNumber = ?, address = ?, dob = ?");
+          conn.prepareStatement(
+              "INSERT INTO users SET firstName = ?, lastName = ?, email = ?, contactNumber = ?, personalNumber = ?, address = ?, dob = ?");
       statement.setString(1, firstName);
       statement.setString(2, lastName);
       statement.setString(3, email);
@@ -74,15 +74,15 @@ public class Database {
         java.sql.Date date = resultSet.getDate("dob");
         LocalDate localDate = date.toLocalDate();
         tempList.add(
-                new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("firstName"),
-                        resultSet.getString("lastName"),
-                        resultSet.getString("email"),
-                        resultSet.getString("contactNumber"),
-                        resultSet.getString("personalNumber"),
-                        resultSet.getString("address"),
-                        localDate));
+            new User(
+                resultSet.getInt("id"),
+                resultSet.getString("firstName"),
+                resultSet.getString("lastName"),
+                resultSet.getString("email"),
+                resultSet.getString("contactNumber"),
+                resultSet.getString("personalNumber"),
+                resultSet.getString("address"),
+                localDate));
       }
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -107,15 +107,15 @@ public class Database {
         java.sql.Date date = resultSet.getDate("dob");
         LocalDate localDate = date.toLocalDate();
         fetchedUser =
-                new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("firstName"),
-                        resultSet.getString("lastName"),
-                        resultSet.getString("email"),
-                        resultSet.getString("contactNumber"),
-                        resultSet.getString("personalNumber"),
-                        resultSet.getString("address"),
-                        localDate);
+            new User(
+                resultSet.getInt("id"),
+                resultSet.getString("firstName"),
+                resultSet.getString("lastName"),
+                resultSet.getString("email"),
+                resultSet.getString("contactNumber"),
+                resultSet.getString("personalNumber"),
+                resultSet.getString("address"),
+                localDate);
         return fetchedUser;
       }
     } catch (Exception ex) {
@@ -142,12 +142,12 @@ public class Database {
     try {
       while (resultSet.next()) {
         tempList.add(
-                new Room(
-                        resultSet.getInt("roomId"),
-                        resultSet.getInt("roomNumber"),
-                        resultSet.getString("RoomType"),
-                        resultSet.getDouble("roomPrice"),
-                        resultSet.getInt("roomCapacity")));
+            new Room(
+                resultSet.getInt("roomId"),
+                resultSet.getInt("roomNumber"),
+                resultSet.getString("RoomType"),
+                resultSet.getDouble("roomPrice"),
+                resultSet.getInt("roomCapacity")));
       }
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -200,12 +200,31 @@ public class Database {
     }
   }
 
-  public  List<Event> listOfEventsByStartDate(Date startDate, Date endDate){
+  public Event createEventFromResultSet(ResultSet resultSet) throws SQLException {
+    if (resultSet == null) {
+      return null;
+    }
+
+    Event event =
+        new Event(
+            resultSet.getString("eventName"),
+            resultSet.getDouble("eventPrice"),
+            resultSet.getInt("packageId"),
+            resultSet.getDate("startDate").toLocalDate(),
+            resultSet.getDate("endDate").toLocalDate());
+
+    event.setEventId(resultSet.getInt(1));
+
+    return event;
+  }
+
+  public List<Event> listOfEventsByStartDate(Date startDate, Date endDate) {
 
     List<Event> eventList = new ArrayList<>();
 
-    try{
-      statement = conn.prepareStatement(" SELECT * FROM events WHERE startDate >= ? && endDate <= ?");
+    try {
+      statement =
+          conn.prepareStatement(" SELECT * FROM events WHERE startDate >= ? && endDate <= ?");
       statement.setDate(1, startDate);
       statement.setDate(2, endDate);
       resultSet = statement.executeQuery();
@@ -218,67 +237,6 @@ public class Database {
     } catch (SQLException e) {
       e.printStackTrace();
       return null;
-    }
-
-  }
-
-  public Event createEventFromResultSet(ResultSet resultSet) throws SQLException {
-    if (resultSet == null) {
-      return null;
-    }
-
-    Event event =
-            new Event(
-                    resultSet.getString("eventName"),
-                    resultSet.getDouble("eventPrice"),
-                    resultSet.getInt("packageId"),
-                    resultSet.getDate("startDate").toLocalDate(),
-                    resultSet.getDate("endDate").toLocalDate());
-
-    event.setEventId(resultSet.getInt(1));
-
-    return event;
-  }
-
-  int createNewBooking(
-          LocalDate date,
-          boolean paid,
-          int userId,
-          LocalDate startDate,
-          LocalDate endDate,
-          int roomId,
-          int travelersNo,
-          double totalPrice,
-          int packageId,
-          int eventId) {
-    try {
-      PreparedStatement statement =
-              conn.prepareStatement(
-                      "INSERT INTO bookings SET bookingDate = ?, paid = ?, userId = ?, tripStartDate = ?, tripEndDate = ?, roomId = ?, noOfTravellers = ?, totalPrice = ?, packageId = ?, eventId = ?",
-                      Statement.RETURN_GENERATED_KEYS);
-      statement.setDate(1, Date.valueOf(date));
-      statement.setBoolean(2, paid);
-      statement.setInt(3, userId);
-      statement.setDate(4, Date.valueOf(startDate));
-      statement.setDate(5, Date.valueOf(endDate));
-      statement.setInt(6, roomId);
-      statement.setInt(7, travelersNo);
-      statement.setDouble(8, totalPrice);
-      statement.setInt(9, packageId);
-      statement.setInt(10, eventId);
-
-      int rowsAffected = statement.executeUpdate();
-
-      if (rowsAffected == 1) {
-        ResultSet generatedKeys = statement.getGeneratedKeys();
-        if (generatedKeys.next()) {
-          return generatedKeys.getInt(1);
-        }
-      }
-      return -1;
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return -1;
     }
   }
 
@@ -308,17 +266,14 @@ public class Database {
     }
 
     Booking booking =
-            new Booking(
-                    resultSet.getDate("bookingDate").toLocalDate(),
-                    resultSet.getBoolean("paid"),
-                    resultSet.getInt("userId"),
-                    resultSet.getDate("tripStartDate").toLocalDate(),
-                    resultSet.getDate("tripEndDate").toLocalDate(),
-                    resultSet.getInt("roomId"),
-                    resultSet.getInt("noOfTravellers"),
-                    resultSet.getDouble("totalPrice"),
-                    resultSet.getInt("packageId"),
-                    resultSet.getInt("eventId"));
+        new Booking(
+            resultSet.getDate("bookingDate").toLocalDate(),
+            resultSet.getBoolean("paid"),
+            resultSet.getInt("userId"),
+            resultSet.getDate("tripStartDate").toLocalDate(),
+            resultSet.getDate("tripEndDate").toLocalDate(),
+            resultSet.getInt("noOfTravellers"),
+            resultSet.getDouble("totalPrice"));
 
     booking.setBookingId(resultSet.getInt(1));
 
@@ -405,96 +360,195 @@ public class Database {
     }
   }
 
-
   public ArrayList<Package> listOfAllPackages() {
     getAllPackages();
     ArrayList<Package> packageList1 = new ArrayList<>();
     try {
       while (resultSet.next()) {
-        packageList1.add(new Package(resultSet.getInt("packageId"),
+        packageList1.add(
+            new Package(
+                resultSet.getInt("packageId"),
                 resultSet.getString("packageType"),
                 resultSet.getString("packageName")));
       }
-    } catch (Exception ex) {ex.printStackTrace();
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
     return packageList1;
   }
 
-  private void getAllPackages(){
-    try{
+  private void getAllPackages() {
+    try {
       statement = conn.prepareStatement("SELECT * FROM packages");
-      resultSet= statement.executeQuery();
+      resultSet = statement.executeQuery();
 
-    } catch (Exception ex) {ex.printStackTrace();}
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
+  public Package fetchedPackageByPackageType(String packageType) {
+    getPackageByPackageType(packageType);
+    Package fetchedPackage;
+    try {
+      if (resultSet.next()) {
+        fetchedPackage =
+            new Package(
+                resultSet.getInt("packageId"),
+                resultSet.getString("packageType"),
+                resultSet.getString("packageName"));
+        return fetchedPackage;
+      }
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    return null;
+  }
 
   public void getPackageByPackageType(String packageType) {
     try {
       statement = conn.prepareStatement("SELECT * FROM packages WHERE packageType = ?");
-      statement.setString(1,packageType);
+      statement.setString(1, packageType);
       resultSet = statement.executeQuery();
-      //System.out.println("The fetchedPackage by packageType is " + resultSet);
-    } catch (Exception ex) { ex.printStackTrace(); }
+      // System.out.println("The fetchedPackage by packageType is " + resultSet);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
-
-
-  public Package fetchedPackageByPackageType(String packageType){
-    getPackageByPackageType(packageType);
+  public Package fetchedPackageByPackageName(String packageName) {
+    getPackageByPackageName(packageName);
     Package fetchedPackage;
-    try{
+    try {
       if (resultSet.next()) {
-        fetchedPackage = new Package(
+        fetchedPackage =
+            new Package(
                 resultSet.getInt("packageId"),
                 resultSet.getString("packageType"),
-                resultSet.getString("packageName")
-        );
+                resultSet.getString("packageName"));
         return fetchedPackage;
       }
 
-    } catch (Exception ex) { ex.printStackTrace(); }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
     return null;
   }
 
   public void getPackageByPackageName(String packageName) {
     try {
       statement = conn.prepareStatement("SELECT * FROM packages WHERE packageName = ?");
-      statement.setString(1,packageName);
+      statement.setString(1, packageName);
       resultSet = statement.executeQuery();
-      //System.out.println("The fetchedPackage by packageName is " + resultSet);
-    } catch (Exception ex) { ex.printStackTrace(); }
-  }
-
-  public Package fetchedPackageByPackageName(String packageName){
-    getPackageByPackageName(packageName);
-    Package fetchedPackage;
-    try{
-      if (resultSet.next()) {
-        fetchedPackage = new Package(
-                resultSet.getInt("packageId"),
-                resultSet.getString("packageType"),
-                resultSet.getString("packageName")
-        );
-        return fetchedPackage;
-      }
-
-    } catch (Exception ex) { ex.printStackTrace(); }
-    return null;
-  }
-
-
-  public void createNewPackage( int packageId, String packageType, String packageName) {
-    try {
-      statement = conn.prepareStatement("INSERT INTO packages SET packageId = ?, packageName = ?, eventPrice = ?");
-      statement.setInt(1,packageId);
-      statement.setString(2,packageType);
-
-      statement.setString(3,packageName);
-    } catch (Exception ex) { ex.printStackTrace();
+      // System.out.println("The fetchedPackage by packageName is " + resultSet);
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
   }
 
+  public void createNewPackage(int packageId, String packageType, String packageName) {
+    try {
+      statement =
+          conn.prepareStatement(
+              "INSERT INTO packages SET packageId = ?, packageName = ?, eventPrice = ?");
+      statement.setInt(1, packageId);
+      statement.setString(2, packageType);
 
+      statement.setString(3, packageName);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
 
+  public int createNewBooking(
+      LocalDate date,
+      boolean paid,
+      int userId,
+      LocalDate startDate,
+      LocalDate endDate,
+      int travelersNo,
+      double totalPrice,
+      List<Integer> roomIds) {
+    try {
+      int bookingId = -1;
+      PreparedStatement statement =
+          conn.prepareStatement(
+              "INSERT INTO bookings SET bookingDate = ?, paid = ?, userId = ?, tripStartDate = ?, tripEndDate = ?, noOfTravellers = ?, totalPrice = ?",
+              Statement.RETURN_GENERATED_KEYS);
+      statement.setDate(1, Date.valueOf(date));
+      statement.setBoolean(2, paid);
+      statement.setInt(3, userId);
+      statement.setDate(4, Date.valueOf(startDate));
+      statement.setDate(5, Date.valueOf(endDate));
+      statement.setInt(6, travelersNo);
+      statement.setDouble(7, totalPrice);
+
+      int rowsAffected = statement.executeUpdate();
+
+      if (rowsAffected == 0) {
+        return bookingId;
+      }
+
+      try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+        if (generatedKeys.next()) {
+          bookingId = generatedKeys.getInt(1);
+          try {
+            PreparedStatement statment =
+                conn.prepareStatement(
+                    "INSERT INTO reservations SET bookingId = ?, roomId = ?",
+                    Statement.RETURN_GENERATED_KEYS);
+            for (int roomId : roomIds) {
+              statment.setInt(1, bookingId);
+              statment.setInt(2, roomId);
+              statment.addBatch();
+            }
+            statment.executeBatch();
+            return bookingId;
+
+          } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+          }
+        }
+      }
+
+      return -1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return -1;
+    }
+  }
+
+  public Booking getBookingWithDetails(int bookingId) {
+    Booking booking;
+    List<Integer> roomIds = new ArrayList<>();
+    try {
+      statement = conn.prepareStatement("SELECT * FROM bookings WHERE bookingId = ?");
+      statement.setInt(1, bookingId);
+      resultSet = statement.executeQuery();
+
+      if (resultSet.next()) {
+        booking = createBookingFromResultSet(resultSet);
+        PreparedStatement roomStatement =
+            conn.prepareStatement("SELECT roomId FROM reservations WHERE bookingId = ?");
+        roomStatement.setInt(1, bookingId);
+        ResultSet roomResultSet = roomStatement.executeQuery();
+
+        while (roomResultSet.next()) {
+          roomIds.add(roomResultSet.getInt("roomId"));
+        }
+
+        booking.setRoomIds(roomIds);
+        System.out.println(booking);
+        return booking;
+      } else {
+        return null;
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
 }

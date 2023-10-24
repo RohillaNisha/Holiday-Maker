@@ -13,17 +13,14 @@ class BookingTest {
   void setUp() {
 
     booking =
-            new Booking(
-                    LocalDate.now(),
-                    true,
-                    1,
-                    LocalDate.of(2023, 11, 1),
-                    LocalDate.of(2023, 11, 11),
-                    1,
-                    2,
-                    1500.0,
-                    201,
-                    1);
+        new Booking(
+            LocalDate.now(),
+            true,
+            1,
+            LocalDate.of(2023, 11, 1),
+            LocalDate.of(2023, 11, 11),
+            1,
+            1500.0);
   }
 
   @Test
@@ -55,11 +52,6 @@ class BookingTest {
   @Test
   void testGetTripEndDate() {
     assertEquals(LocalDate.parse("2023-11-11"), booking.getTripEndDate());
-  }
-
-  @Test
-  void testGetRoomID() {
-    assertEquals(1, booking.getRoomId());
   }
 
   @Test

@@ -1,8 +1,4 @@
 package org.example.booking;
-import org.example.Database;
-import org.example.Event;
-import org.example.Room;
-import org.example.User;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -10,97 +6,139 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.example.Database;
+import org.example.Event;
+import org.example.Room;
+import org.example.User;
 
 public class BookingProcess {
 
-    private static Database db = new Database();
-    private static List<Event> selectedEvents = new ArrayList<>();
-    private static List<Event> eventListPickedByUser;
-    private static List<Room> roomList;
-    private static List<Room> roomListPickedByUser = new ArrayList<>();
+  private static final Database db = new Database();
+  private static final List<Event> selectedEvents = new ArrayList<>();
+  private static final List<Room> roomListPickedByUser = new ArrayList<>();
+  private static final List<Integer> selectedRoomIds = new ArrayList<>();
+  private static final LocalDate currentDate = LocalDate.now();
+  static Scanner input = new Scanner(System.in);
+  private static List<Event> availableEvents;
+  private static List<Room> allRooms;
 
-     static Scanner input = new Scanner(System.in);
+  public static void createABooking() {
 
-     public static void createABooking(){
+    System.out.println("Enter customer's personal number: ");
+    String personalNumber = input.nextLine();
+    User fetchedUser = searchUserByPersonalNumber(personalNumber);
 
-         System.out.println("Enter customer's personal number: ");
-         String personalNumber = input.nextLine();
-          User fetchedUser = searchUserByPersonalNumber(personalNumber);
-          if(fetchedUser == null){
-             System.out.println("This is a new customer. Create the customer first.");
-             return;
-         }
-         System.out.println("Enter start date for your trip: (yyyy-mm-dd) ");
-         LocalDate startDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-         System.out.println("Enter end date for your trip: (yyyy-mm-dd) ");
-         LocalDate endDate = LocalDate.parse(input.nextLine(), DateTimeFormatter.ISO_LOCAL_DATE);
-         searchEventsByStartDate(startDate, endDate);
-         System.out.println("Select id's of the events (comma separated) that you want to add");
-         String eventsSelected = input.nextLine();
-         String[] eventIds = eventsSelected.split(",");
+    if (fetchedUser == null) {
+      System.out.println("This is a new customer. Create the customer first.");
+      return;
+    }
 
-         for(String eventId : eventIds){
-             for(int i = 0; i < eventListPickedByUser.size(); i++){
-                 if(eventListPickedByUser.get(i).getEventId() == Integer.parseInt(eventId)){
-                     selectedEvents.add(eventListPickedByUser.get(i));
-                 }
-             }
-         }
-         System.out.println("Enter number of travelers");
-         int noOfTravelers = input.nextInt();
-         input.nextLine();
-         roomList = db.listOfAllRooms();
-         System.out.println(roomList);
-         System.out.println("Please select rooms (comma separated)");
-         String roomsSelected = input.nextLine();
-         String[] roomsIds = roomsSelected.split(",");
+    LocalDate startDate = getUserInputDate("Enter start date for your trip: ");
+    LocalDate endDate = getUserInputDate("Enter end date for your trip: ");
+    searchEventsByStartDate(startDate, endDate);
 
-         for(String roomId : roomsIds){
-             for(int i = 0; i < roomList.size(); i++){
-                 if(roomList.get(i).getId() == Integer.parseInt(roomId)){
-                     roomListPickedByUser.add(roomList.get(i));
-                 }
-             }
-         }
-         int totalCapacity = 0;
-         for(Room room : roomListPickedByUser){
-             totalCapacity += room.getRoomCapacity();
-         }
-         if(noOfTravelers > totalCapacity){
-             System.out.println("You need more rooms");
-             System.out.println(roomList);
-             int newRoomAdded = input.nextInt();
-             input.nextLine();
-             for(Room room : roomList){
-                 if(room.getId() == newRoomAdded){
-                     roomListPickedByUser.add(room);
-                 }
-             }
-         }
-         System.out.println("Updated: " + roomListPickedByUser);
+    if (availableEvents.isEmpty()) {
+      System.out.println("No events found for the selected date range.");
+      return;
+    }
 
+    System.out.println("Select id's of the events (comma separated) that you want to add");
+    String eventSelection = input.nextLine();
+    selectEvents(eventSelection);
 
+    int noOfTravelers = getUserInputInt("Enter number of travelers: ");
+    input.nextLine();
 
-     }
+    selectRooms();
 
-     public static User searchUserByPersonalNumber(String personalNumber){
-         User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
-         return fetchedUser;
-     }
+    int totalCapacity = 0;
+    for (Room room : roomListPickedByUser) {
+      totalCapacity += room.getRoomCapacity();
+    }
+    if (noOfTravelers > totalCapacity) {
+      System.out.println("You need more rooms");
+      System.out.println(allRooms);
+      selectRooms();
+    }
 
-     public static List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate){
+    int id =
+        db.createNewBooking(
+            currentDate,
+            true,
+            fetchedUser.getId(),
+            startDate,
+            endDate,
+            noOfTravelers,
+            1500.0,
+            selectedRoomIds);
+    System.out.println(db.getBookingWithDetails(id));
+  }
 
-         eventListPickedByUser = db.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
-         displayFetchedEvents(eventListPickedByUser);
-         return eventListPickedByUser;
-     }
+  public static User searchUserByPersonalNumber(String personalNumber) {
+    User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
+    return fetchedUser;
+  }
 
-     public static void displayFetchedEvents(List<Event> eventList){
-         System.out.println("No. Event id         Date       Price    Event name");
-         for(int i = 0; i < eventList.size(); i++){
+  private static LocalDate getUserInputDate(String prompt) {
+    System.out.print(prompt + " (yyyy-MM-dd): ");
+    String inputDate = input.nextLine();
+    return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
+  }
 
-             System.out.println(i + 1 + ".) " + eventList.get(i).getEventId() +  "    " + eventList.get(i).getStartDate() + "      " + eventList.get(i).getEventPrice() + " " + eventList.get(i).getEventName() );
-         }
-     }
+  public static List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
 
+    availableEvents = db.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
+    displayFetchedEvents(availableEvents);
+    return availableEvents;
+  }
+
+  private static void selectEvents(String eventSelection) {
+    String[] eventIds = eventSelection.split(",");
+    for (String eventId : eventIds) {
+      for (Event event : availableEvents) {
+        if (event.getEventId() == Integer.parseInt(eventId)) {
+          selectedEvents.add(event);
+        }
+      }
+    }
+  }
+
+  private static int getUserInputInt(String prompt) {
+    System.out.print(prompt);
+    return input.nextInt();
+  }
+
+  private static void selectRooms() {
+    allRooms = db.listOfAllRooms();
+    System.out.println(allRooms);
+    System.out.println("Please select room IDs (comma separated): ");
+    String roomSelection = input.nextLine();
+    String[] roomIds = roomSelection.split(",");
+    for (String roomId : roomIds) {
+      for (Room room : allRooms) {
+        if (room.getId() == Integer.parseInt(roomId)) {
+          roomListPickedByUser.add(room);
+          selectedRoomIds.add(room.getId());
+        }
+      }
+    }
+  }
+
+  public static void displayFetchedEvents(List<Event> eventList) {
+    System.out.println("No. Event id         Date       Price    Event name");
+    for (int i = 0; i < eventList.size(); i++) {
+
+      System.out.println(
+          i
+              + 1
+              + ".) "
+              + eventList.get(i).getEventId()
+              + "    "
+              + eventList.get(i).getStartDate()
+              + "      "
+              + eventList.get(i).getEventPrice()
+              + " "
+              + eventList.get(i).getEventName());
+    }
+  }
 }

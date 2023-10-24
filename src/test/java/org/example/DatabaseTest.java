@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.example.booking.Booking;
 import org.junit.jupiter.api.AfterEach;
@@ -79,66 +80,26 @@ class DatabaseTest {
   }
 
   @Test
-  void testCreateNewBookingSuccess() {
-    LocalDate date = LocalDate.now();
-    boolean paid = true;
-    int userId = 1;
-    LocalDate startDate = LocalDate.of(2023, 11, 1);
-    LocalDate endDate = LocalDate.of(2023, 11, 11);
-    int roomId = 1;
-    int travelersNo = 2;
-    double totalPrice = 1500.0;
-    int packageId = 201;
-    int eventId = 1;
-
-    int bookingId =
-        db.createNewBooking(
-            date,
-            paid,
-            userId,
-            startDate,
-            endDate,
-            roomId,
-            travelersNo,
-            totalPrice,
-            packageId,
-            eventId);
-
-    assertNotEquals(0, bookingId);
-  }
-
-  @Test
   void testCreateNewBookingFailure() {
     LocalDate date = LocalDate.now();
     boolean paid = true;
-    int userId = 111111;
+    int userId = 1111;
     LocalDate startDate = LocalDate.now();
     LocalDate endDate = LocalDate.now();
-    int roomId = 1;
     int travelersNo = 2;
     double totalPrice = 200.0;
-    int packageId = 201;
-    int eventId = 1;
+    List<Integer> roomIds = Arrays.asList(1, 2, 3);
 
     int bookingId =
         db.createNewBooking(
-            date,
-            paid,
-            userId,
-            startDate,
-            endDate,
-            roomId,
-            travelersNo,
-            totalPrice,
-            packageId,
-            eventId);
+            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds);
 
     assertEquals(-1, bookingId);
   }
 
   @Test
   void testGetBookingSuccess() {
-    int bookingId = 116;
+    int bookingId = 127;
     Booking booking = db.getBooking(bookingId);
 
     assertEquals(bookingId, booking.getBookingId());
@@ -210,16 +171,34 @@ class DatabaseTest {
   }
 
   @Test
-  void testDeleteBookingSuccess(){
+  void testDeleteBookingSuccess() {
     int bookingId = 122;
     boolean deletedBooking = db.deleteBooking(bookingId);
-    assertTrue( deletedBooking);
+    assertTrue(deletedBooking);
   }
 
   @Test
   void testDeleteBookingFailure() {
     int bookingId = 1166;
     boolean deletedBooking = db.deleteBooking(bookingId);
-    assertFalse( deletedBooking);
+    assertFalse(deletedBooking);
+  }
+
+  @Test
+  void testCreateNewBookingSuccess() {
+    LocalDate date = LocalDate.now();
+    boolean paid = true;
+    int userId = 1;
+    LocalDate startDate = LocalDate.of(2023, 11, 1);
+    LocalDate endDate = LocalDate.of(2023, 11, 11);
+    int travelersNo = 2;
+    double totalPrice = 1500.0;
+    List<Integer> roomIds = Arrays.asList(1, 2, 3);
+
+    int bookingId =
+        db.createNewBooking(
+            date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds);
+
+    assertNotEquals(1, bookingId);
   }
 }

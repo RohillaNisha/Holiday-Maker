@@ -1,88 +1,125 @@
 package org.example.booking;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
-    private final LocalDate bookingDate;
-    private final boolean paid;
-    private final int userId;
-    private final LocalDate tripStartDate;
-    private final LocalDate tripEndDate;
-    private final int roomId;
-    private final int noOfTravellers;
-    private final double totalPrice;
-    private final int packageId;
-    private final int eventId;
-    private int bookingId;
+  private final LocalDate bookingDate;
+  private final boolean paid;
+  private final int userId;
+  private final LocalDate tripStartDate;
+  private final LocalDate tripEndDate;
+  private final int noOfTravellers;
+  private final double totalPrice;
+  private int packageId;
+  private int eventId;
+  private int bookingId;
+  private List<Integer> roomIds = new ArrayList<>();
 
-    public Booking(
-            LocalDate bookingDate,
-            boolean paid,
-            int userId,
-            LocalDate tripStartDate,
-            LocalDate tripEndDate,
-            int roomId,
-            int noOfTravellers,
-            double totalPrice,
-            int packageId,
-            int eventId) {
-        this.bookingDate = bookingDate;
-        this.paid = paid;
-        this.userId = userId;
-        this.tripStartDate = tripStartDate;
-        this.tripEndDate = tripEndDate;
-        this.roomId = roomId;
-        this.noOfTravellers = noOfTravellers;
-        this.totalPrice = totalPrice;
-        this.packageId = packageId;
-        this.eventId = eventId;
-    }
+  public Booking(
+      LocalDate bookingDate,
+      boolean paid,
+      int userId,
+      LocalDate tripStartDate,
+      LocalDate tripEndDate,
+      int noOfTravellers,
+      double totalPrice) {
 
-    public int getBookingId() {
-        return bookingId;
-    }
+    this.bookingDate = bookingDate;
+    this.paid = paid;
+    this.userId = userId;
+    this.tripStartDate = tripStartDate;
+    this.tripEndDate = tripEndDate;
+    this.noOfTravellers = noOfTravellers;
+    this.totalPrice = totalPrice;
+  }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
+  public void setRoomIds(List<Integer> roomIds) {
 
-    public LocalDate getBookingDate() {
-        return bookingDate;
-    }
+    this.roomIds = roomIds;
+  }
 
-    public boolean isPaid() {
-        return paid;
-    }
+  public int getBookingId() {
+    return bookingId;
+  }
 
-    public int getUserId() {
-        return userId;
-    }
+  public void setBookingId(int bookingId) {
+    this.bookingId = bookingId;
+  }
 
-    public LocalDate getTripStartDate() {
-        return tripStartDate;
-    }
+  public LocalDate getBookingDate() {
+    return bookingDate;
+  }
 
-    public LocalDate getTripEndDate() {
-        return tripEndDate;
-    }
+  public boolean isPaid() {
+    return paid;
+  }
 
-    public int getRoomId() {
-        return roomId;
-    }
+  public int getUserId() {
+    return userId;
+  }
 
-    public int getNoOfTravellers() {
-        return noOfTravellers;
-    }
+  public LocalDate getTripStartDate() {
+    return tripStartDate;
+  }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
+  public LocalDate getTripEndDate() {
+    return tripEndDate;
+  }
 
-    public int getPackageId() {
-        return packageId;
-    }
+  public int getNoOfTravellers() {
+    return noOfTravellers;
+  }
 
-    public int getEventId() {
-        return eventId;
-    }
+  public double getTotalPrice() {
+    return totalPrice;
+  }
+
+  public int getPackageId() {
+    return packageId;
+  }
+
+  public void setPackageId(int packageId) {
+
+    this.packageId = packageId;
+  }
+
+  public int getEventId() {
+    return eventId;
+  }
+
+  public void setEventId(int eventId) {
+
+    this.eventId = eventId;
+  }
+
+  @Override
+  public String toString() {
+
+    return "Booking{"
+        + "bookingDate="
+        + bookingDate
+        + ", paid="
+        + paid
+        + ", userId="
+        + userId
+        + ", tripStartDate="
+        + tripStartDate
+        + ", tripEndDate="
+        + tripEndDate
+        + ", noOfTravellers="
+        + noOfTravellers
+        + ", totalPrice="
+        + totalPrice
+        + ", packageId="
+        + packageId
+        + ", eventId="
+        + eventId
+        + ", bookingId="
+        + bookingId
+        + ", roomIds="
+        + roomIds
+        + '}';
+  }
 }
