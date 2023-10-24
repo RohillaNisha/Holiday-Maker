@@ -37,25 +37,25 @@ public class Users {
     public static void createAUser(){
         System.out.println("Enter the users details: ");
         System.out.println("Enter your firstname:");
-        String firstName= input.nextLine();
+        String firstName= Users.input.nextLine();
 
         System.out.println("Enter your lastname: ");
-        String lastName= input.nextLine();
+        String lastName= Users.input.nextLine();
 
         System.out.println("Enter your email:");
-        String email= input.nextLine();
+        String email= Users.input.nextLine();
 
         System.out.println("Enter your number:");
-        String contactNumber= input.nextLine();
+        String contactNumber= Users.input.nextLine();
 
         System.out.println("Enter your personal nember:");
-        String personalNumber= input.nextLine();
+        String personalNumber= Users.input.nextLine();
 
         System.out.println("Enter your address:");
-        String address= input.nextLine();
+        String address= Users.input.nextLine();
 
         System.out.println("Enter your date of birth (YYYY-MM_DD) :");
-        String dobString=input.nextLine();
+        String dobString= Users.input.nextLine();
         LocalDate dob= LocalDate.parse(dobString);
         db.createNewUser(firstName, lastName, email, contactNumber, personalNumber, address, dob);
         userList= db.listOfAllUsers();

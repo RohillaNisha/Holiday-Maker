@@ -9,7 +9,7 @@ public class MainMenu extends Menu{
         super(menuName);
         menuOptions =
                 List.of(
-                        new MenuOption(1, "create a new customer", Users::createAUser),
+                        new MenuOption(1, "create a new customer", () -> Users.createAUser()),
                         new MenuOption(2, "Create A Journey", () -> {}),
                         new MenuOption(3, "Find A Booking", () -> {}),
                         new MenuOption(4, "Exit", () -> {}));
