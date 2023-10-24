@@ -13,7 +13,7 @@ public class Booking {
   private final int noOfTravellers;
   private final double totalPrice;
   private int packageId;
-  private int eventId;
+  private List<Integer> eventIds = new ArrayList<>();
   private int bookingId;
   private List<Integer> roomIds = new ArrayList<>();
 
@@ -85,13 +85,12 @@ public class Booking {
     this.packageId = packageId;
   }
 
-  public int getEventId() {
-    return eventId;
+  public List<Integer> getEventIds() {
+    return eventIds;
   }
 
-  public void setEventId(int eventId) {
-
-    this.eventId = eventId;
+  public void setEventIds(List<Integer> eventIds) {
+    this.eventIds = eventIds;
   }
 
   @Override
@@ -114,8 +113,8 @@ public class Booking {
         + totalPrice
         + ", packageId="
         + packageId
-        + ", eventId="
-        + eventId
+        + ", eventIds="
+        + eventIds
         + ", bookingId="
         + bookingId
         + ", roomIds="

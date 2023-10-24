@@ -13,16 +13,17 @@ import org.example.User;
 
 public class BookingProcess {
 
-  private static final Database db = new Database();
-  private static final List<Event> selectedEvents = new ArrayList<>();
-  private static final List<Room> roomListPickedByUser = new ArrayList<>();
-  private static final List<Integer> selectedRoomIds = new ArrayList<>();
-  private static final LocalDate currentDate = LocalDate.now();
-  static Scanner input = new Scanner(System.in);
-  private static List<Event> availableEvents;
-  private static List<Room> allRooms;
+  private final Database db = new Database();
+  private final List<Event> selectedEvents = new ArrayList<>();
+  private final List<Room> roomListPickedByUser = new ArrayList<>();
+  private List<Integer> selectedRoomIds = new ArrayList<>();
+  private final LocalDate currentDate = LocalDate.now();
+  private List<Integer> selectedEventIds = new ArrayList<>();
+   Scanner input = new Scanner(System.in);
+  private List<Event> availableEvents;
+  private List<Room> allRooms;
 
-  public static void createABooking() {
+  public void createABooking() {
 
     System.out.println("Enter customer's personal number: ");
     String personalNumber = input.nextLine();
@@ -57,7 +58,6 @@ public class BookingProcess {
     }
     if (noOfTravelers > totalCapacity) {
       System.out.println("You need more rooms");
-      System.out.println(allRooms);
       selectRooms();
     }
 
@@ -70,45 +70,49 @@ public class BookingProcess {
             endDate,
             noOfTravelers,
             1500.0,
-            selectedRoomIds);
+            selectedRoomIds,
+                selectedEventIds);
+    selectedRoomIds = new ArrayList<>();
+    selectedEventIds = new ArrayList<>();
     System.out.println(db.getBookingWithDetails(id));
   }
 
-  public static User searchUserByPersonalNumber(String personalNumber) {
+  public User searchUserByPersonalNumber(String personalNumber) {
     User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
     return fetchedUser;
   }
 
-  private static LocalDate getUserInputDate(String prompt) {
+  private LocalDate getUserInputDate(String prompt) {
     System.out.print(prompt + " (yyyy-MM-dd): ");
     String inputDate = input.nextLine();
     return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
   }
 
-  public static List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
+  public List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
 
     availableEvents = db.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
     displayFetchedEvents(availableEvents);
     return availableEvents;
   }
 
-  private static void selectEvents(String eventSelection) {
+  private void selectEvents(String eventSelection) {
     String[] eventIds = eventSelection.split(",");
     for (String eventId : eventIds) {
       for (Event event : availableEvents) {
         if (event.getEventId() == Integer.parseInt(eventId)) {
           selectedEvents.add(event);
+          selectedEventIds.add(event.getEventId());
         }
       }
     }
   }
 
-  private static int getUserInputInt(String prompt) {
+  private int getUserInputInt(String prompt) {
     System.out.print(prompt);
     return input.nextInt();
   }
 
-  private static void selectRooms() {
+  private void selectRooms() {
     allRooms = db.listOfAllRooms();
     System.out.println(allRooms);
     System.out.println("Please select room IDs (comma separated): ");
@@ -124,7 +128,7 @@ public class BookingProcess {
     }
   }
 
-  public static void displayFetchedEvents(List<Event> eventList) {
+  public void displayFetchedEvents(List<Event> eventList) {
     System.out.println("No. Event id         Date       Price    Event name");
     for (int i = 0; i < eventList.size(); i++) {
 

@@ -1,6 +1,7 @@
 package org.example;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Event {
     private int eventId;
@@ -28,8 +29,7 @@ public class Event {
     }
 
 
-
-    //getter
+//getter
 
     public int getEventId() {
 
