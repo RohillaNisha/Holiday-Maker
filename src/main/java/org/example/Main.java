@@ -15,9 +15,9 @@ public class Main {
         Packages packages = new Packages();
 
 
-        System.out.println(users.getTotalNumberOfUsers());
+       // System.out.println(users.getTotalNumberOfUsers());
 
-        users.printAllUsers();
+       // users.printAllUsers();
         events.printAllEvents();
         packages.printAllPackages();
 
