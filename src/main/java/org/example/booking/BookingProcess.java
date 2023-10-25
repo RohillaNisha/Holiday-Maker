@@ -80,25 +80,25 @@ public class BookingProcess {
     System.out.println("Booking is done with booking id: " + id);
   }
 
-  private User searchUserByPersonalNumber(String personalNumber) {
+  public User searchUserByPersonalNumber(String personalNumber) {
     User fetchedUser = db.searchedUserByPersonalNumber(personalNumber);
     return fetchedUser;
   }
 
-  private LocalDate getUserInputDate(String prompt) {
+  public LocalDate getUserInputDate(String prompt) {
     System.out.print(prompt + " (yyyy-MM-dd): ");
     String inputDate = input.nextLine();
     return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
   }
 
-  private List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
+  public List<Event> searchEventsByStartDate(LocalDate startDate, LocalDate endDate) {
 
     availableEvents = db.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
     displayFetchedEvents(availableEvents);
     return availableEvents;
   }
 
-  private void selectEvents(String eventSelection) {
+  public void selectEvents(String eventSelection) {
     String[] eventIds = eventSelection.split(",");
     for (String eventId : eventIds) {
       for (Event event : availableEvents) {
@@ -110,12 +110,12 @@ public class BookingProcess {
     }
   }
 
-  private int getUserInputInt(String prompt) {
+  public int getUserInputInt(String prompt) {
     System.out.print(prompt);
     return input.nextInt();
   }
 
-  private void selectRooms() {
+  public void selectRooms() {
     allRooms = db.listOfAllRooms();
     System.out.println(allRooms);
     System.out.println("Please select room IDs (comma separated): ");
@@ -131,7 +131,7 @@ public class BookingProcess {
     }
   }
 
-  private void displayFetchedEvents(List<Event> eventList) {
+  public void displayFetchedEvents(List<Event> eventList) {
     System.out.println("No. Event id         Date       Price    Event name");
     for (int i = 0; i < eventList.size(); i++) {
 
@@ -149,7 +149,7 @@ public class BookingProcess {
     }
   }
 
-  private void calculateTotalPrice(int noOfTravelers){
+  public void calculateTotalPrice(int noOfTravelers){
     for(Event event : selectedEvents){
       totalPrice += event.getEventPrice() * noOfTravelers;
     }
@@ -169,7 +169,7 @@ public class BookingProcess {
     int bookingIdForSearch = getUserInputInt("Enter your booking id: ");
     Booking booking = db.getBookingWithDetails(bookingIdForSearch);
     System.out.println(booking);
-    int userInput = getUserInputInt("Click 1 to make it paid. Click 2 to make it unpaid");
+    int userInput = getUserInputInt("Click 1 to make it paid. Click 2 to make it unpaid: ");
     input.nextLine();
     if(userInput == 1){
       db.updateBooking(booking.getBookingId(), "paid", true);
