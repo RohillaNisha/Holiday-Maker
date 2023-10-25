@@ -14,14 +14,14 @@ import org.example.User;
 public class BookingProcess {
 
   private final Database db = new Database();
-  private List<Event> selectedEvents = new ArrayList<>();
-  private List<Room> roomListPickedByUser = new ArrayList<>();
-  private List<Integer> selectedRoomIds = new ArrayList<>();
+  public List<Event> selectedEvents = new ArrayList<>();
+  public List<Room> roomListPickedByUser = new ArrayList<>();
+  public List<Integer> selectedRoomIds = new ArrayList<>();
   private final LocalDate currentDate = LocalDate.now();
-  private List<Integer> selectedEventIds = new ArrayList<>();
+  public List<Integer> selectedEventIds = new ArrayList<>();
   Scanner input = new Scanner(System.in);
   private List<Event> availableEvents;
-  private double totalPrice = 0;
+  public double totalPrice = 0;
   private List<Room> allRooms;
 
   public void createABooking() {
@@ -180,7 +180,7 @@ public class BookingProcess {
     }
   }
 
-  private void reset(){
+  void reset(){
     selectedRoomIds = new ArrayList<>();
     selectedEventIds = new ArrayList<>();
     selectedEvents = new ArrayList<>();
