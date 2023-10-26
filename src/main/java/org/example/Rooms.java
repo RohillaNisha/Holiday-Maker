@@ -1,11 +1,12 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Rooms {
 
     private Database db;
-    private ArrayList<Room> roomList;
+    private List<Room> roomList;
 
     public Rooms() {
         this.db = new Database();

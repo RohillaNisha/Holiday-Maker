@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b1aebca-8bd5-4e5c-9eb5-0acd8515309f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/EventBookingProcess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/UserInteraction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/EventBookingProcessTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/UserInteractionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Rooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Rooms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingProcessTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/DatabaseTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -62,16 +75,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;createYourOwnTrip&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "createYourOwnTrip",
+    "last_opened_file_path": "/Users/mukhtar/Desktop/Holiday-Maker1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.BookingProcessTest.testReset">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.example.booking" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="HolidayMaker" />
@@ -85,7 +113,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookingProcessTest.testGetUserInputDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BookingServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HolidayMaker" />
       <extension name="coverage">
         <pattern>
@@ -94,14 +122,44 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.booking" />
-      <option name="MAIN_CLASS_NAME" value="org.example.booking.BookingProcessTest" />
-      <option name="METHOD_NAME" value="testGetUserInputDate" />
+      <option name="MAIN_CLASS_NAME" value="org.example.booking.BookingServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventBookingProcessTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HolidayMaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.booking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.booking" />
+      <option name="MAIN_CLASS_NAME" value="org.example.booking.EventBookingProcessTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventBookingProcessTest.testCreateABooking" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HolidayMaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.booking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.booking" />
+      <option name="MAIN_CLASS_NAME" value="org.example.booking.EventBookingProcessTest" />
+      <option name="METHOD_NAME" value="testCreateABooking" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookingProcessTest.testGetUserInputDate_ValidInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserInteractionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HolidayMaker" />
       <extension name="coverage">
         <pattern>
@@ -110,52 +168,19 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example.booking" />
-      <option name="MAIN_CLASS_NAME" value="org.example.booking.BookingProcessTest" />
-      <option name="METHOD_NAME" value="testGetUserInputDate_ValidInput" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookingProcessTest.testReset" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HolidayMaker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.booking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.booking" />
-      <option name="MAIN_CLASS_NAME" value="org.example.booking.BookingProcessTest" />
-      <option name="METHOD_NAME" value="testReset" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookingProcessTest.testSearchEventByStartDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HolidayMaker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.booking.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.booking" />
-      <option name="MAIN_CLASS_NAME" value="org.example.booking.BookingProcessTest" />
-      <option name="METHOD_NAME" value="testSearchEventByStartDate" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="org.example.booking.UserInteractionTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BookingProcessTest.testReset" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.BookingProcessTest.testSearchEventByStartDate" />
-        <item itemvalue="JUnit.BookingProcessTest.testGetUserInputDate" />
-        <item itemvalue="JUnit.BookingProcessTest.testGetUserInputDate_ValidInput" />
+        <item itemvalue="JUnit.EventBookingProcessTest.testCreateABooking" />
+        <item itemvalue="JUnit.BookingServiceTest" />
+        <item itemvalue="JUnit.UserInteractionTest" />
+        <item itemvalue="JUnit.EventBookingProcessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -167,8 +192,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698147812403</updated>
+      <workItem from="1698263223543" duration="4143000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

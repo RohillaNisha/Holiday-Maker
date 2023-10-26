@@ -59,7 +59,7 @@ class DatabaseTest {
 
   @Test
   void testListOfAllRooms() {
-    ArrayList<Room> rooms = db.listOfAllRooms();
+    List<Room> rooms = db.listOfAllRooms();
 
     assertFalse(rooms.isEmpty(), "Room list is empty.");
   }

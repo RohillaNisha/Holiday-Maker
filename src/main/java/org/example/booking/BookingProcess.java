@@ -158,11 +158,57 @@ public class BookingProcess {
     }
   }
 
-  public void findABooking(){
+  public void findABooking() {
+    List<Booking> bookingList = new ArrayList<>();
     int bookingIdForSearch = getUserInputInt("Enter your booking id: ");
     input.nextLine();
-    System.out.println(db.getBookingWithDetails(bookingIdForSearch));
+    bookingList.add(db.getBookingWithDetails(bookingIdForSearch));
+    displayFetchedBookings(bookingList);
+  }
 
+  public void displayFetchedBookings(List<Booking> bookingList) {
+    System.out.printf(
+            "------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
+    System.out.printf(
+            "                                                                            BOOKINGS                                                                            %n");
+    System.out.printf(
+            "------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
+
+    System.out.printf(
+            "| %-4s | %-4S | %-12s | %-30s | %-12S | %-12S | %-10S | %-13S | %-8S | %-11S | %-6s |%n",
+            "NO.",
+            "ID",
+            "BOOKING DATE",
+            "USER NAME",
+            "START DATE",
+            "END DATE",
+            "EVENT IDS",
+            "TRAVELERS NO.",
+            "ROOM IDS",
+            "TOTAL PRICE",
+            "PAID");
+
+    System.out.printf(
+            "------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
+
+    for (int i = 0; i < bookingList.size(); i++) {
+      System.out.printf(
+              "| %-4s | %-4s | %-12s | %-30s | %-12S | %-12S | %-10S | %-13S | %-8S | %-11S | %-6s |%n",
+              i + 1 + ".)",
+              bookingList.get(i).getBookingId(),
+              bookingList.get(i).getBookingDate(),
+              bookingList.get(i).getUserName(),
+              bookingList.get(i).getTripEndDate(),
+              bookingList.get(i).getTripEndDate(),
+              bookingList.get(i).getEventIds(),
+              bookingList.get(i).getNoOfTravellers(),
+              bookingList.get(i).getRoomIds(),
+              bookingList.get(i).getTotalPrice(),
+              bookingList.get(i).isPaid());
+    }
+
+    System.out.printf(
+            "------------------------------------------------------------------------------------------------------------------------------------------------------------%n");
   }
 
   public void changePaidStatus(){

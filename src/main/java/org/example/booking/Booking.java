@@ -18,14 +18,29 @@ public class Booking {
   private int bookingId;
   private List<Integer> roomIds = new ArrayList<>();
 
+  public List<Integer> getRoomIds() {
+
+    return roomIds;
+  }
+
+  public List<Integer> getEventIds() {
+
+    return eventIds;
+  }
+
+  public String getUserName() {
+
+    return userName;
+  }
+
   public Booking(
-      LocalDate bookingDate,
-      boolean paid,
-      int userId,
-      LocalDate tripStartDate,
-      LocalDate tripEndDate,
-      int noOfTravellers,
-      double totalPrice) {
+          LocalDate bookingDate,
+          boolean paid,
+          int userId,
+          LocalDate tripStartDate,
+          LocalDate tripEndDate,
+          int noOfTravellers,
+          double totalPrice) {
 
     this.bookingDate = bookingDate;
     this.paid = paid;
@@ -93,28 +108,28 @@ public class Booking {
   public String toString() {
 
     return "Booking{"
-        + "bookingDate="
-        + bookingDate
-        + ", paid="
-        + paid
-        + ", userName="
-        + userName
-        + ", tripStartDate="
-        + tripStartDate
-        + ", tripEndDate="
-        + tripEndDate
-        + ", noOfTravellers="
-        + noOfTravellers
-        + ", totalPrice="
-        + totalPrice
-        + ", packageId="
-        + packageId
-        + ", eventIds="
-        + eventIds
-        + ", bookingId="
-        + bookingId
-        + ", roomIds="
-        + roomIds
-        + '}';
+            + "bookingDate="
+            + bookingDate
+            + ", paid="
+            + paid
+            + ", userName="
+            + userName
+            + ", tripStartDate="
+            + tripStartDate
+            + ", tripEndDate="
+            + tripEndDate
+            + ", noOfTravellers="
+            + noOfTravellers
+            + ", totalPrice="
+            + totalPrice
+            + ", packageId="
+            + packageId
+            + ", eventIds="
+            + eventIds
+            + ", bookingId="
+            + bookingId
+            + ", roomIds="
+            + roomIds
+            + '}';
   }
 }

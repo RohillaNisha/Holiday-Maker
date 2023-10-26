@@ -136,9 +136,9 @@ public class Database {
     }
   }
 
-  public ArrayList<Room> listOfAllRooms() {
+  public List<Room> listOfAllRooms() {
     getAllRooms();
-    ArrayList<Room> tempList = new ArrayList<Room>();
+    List<Room> tempList = new ArrayList<Room>();
     try {
       while (resultSet.next()) {
         tempList.add(
