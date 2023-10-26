@@ -1,41 +1,63 @@
 package org.example.booking;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
   private final LocalDate bookingDate;
-  private final boolean paid;
+  private boolean paid;
   private final int userId;
+  private String userName;
   private final LocalDate tripStartDate;
   private final LocalDate tripEndDate;
-  private final int roomId;
   private final int noOfTravellers;
   private final double totalPrice;
-  private final int packageId;
-  private final int eventId;
+  private int packageId;
+  private List<Integer> eventIds = new ArrayList<>();
   private int bookingId;
+  private List<Integer> roomIds = new ArrayList<>();
+
+  public List<Integer> getRoomIds() {
+
+    return roomIds;
+  }
+
+  public List<Integer> getEventIds() {
+
+    return eventIds;
+  }
+
+  public String getUserName() {
+
+    return userName;
+  }
 
   public Booking(
-      LocalDate bookingDate,
-      boolean paid,
-      int userId,
-      LocalDate tripStartDate,
-      LocalDate tripEndDate,
-      int roomId,
-      int noOfTravellers,
-      double totalPrice,
-      int packageId,
-      int eventId) {
+          LocalDate bookingDate,
+          boolean paid,
+          int userId,
+          LocalDate tripStartDate,
+          LocalDate tripEndDate,
+          int noOfTravellers,
+          double totalPrice) {
+
     this.bookingDate = bookingDate;
     this.paid = paid;
     this.userId = userId;
     this.tripStartDate = tripStartDate;
     this.tripEndDate = tripEndDate;
-    this.roomId = roomId;
     this.noOfTravellers = noOfTravellers;
     this.totalPrice = totalPrice;
-    this.packageId = packageId;
-    this.eventId = eventId;
+  }
+
+  public void setRoomIds(List<Integer> roomIds) {
+
+    this.roomIds = roomIds;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public int getBookingId() {
@@ -66,10 +88,6 @@ public class Booking {
     return tripEndDate;
   }
 
-  public int getRoomId() {
-    return roomId;
-  }
-
   public int getNoOfTravellers() {
     return noOfTravellers;
   }
@@ -82,7 +100,36 @@ public class Booking {
     return packageId;
   }
 
-  public int getEventId() {
-    return eventId;
+  public void setEventIds(List<Integer> eventIds) {
+    this.eventIds = eventIds;
+  }
+
+  @Override
+  public String toString() {
+
+    return "Booking{"
+            + "bookingDate="
+            + bookingDate
+            + ", paid="
+            + paid
+            + ", userName="
+            + userName
+            + ", tripStartDate="
+            + tripStartDate
+            + ", tripEndDate="
+            + tripEndDate
+            + ", noOfTravellers="
+            + noOfTravellers
+            + ", totalPrice="
+            + totalPrice
+            + ", packageId="
+            + packageId
+            + ", eventIds="
+            + eventIds
+            + ", bookingId="
+            + bookingId
+            + ", roomIds="
+            + roomIds
+            + '}';
   }
 }

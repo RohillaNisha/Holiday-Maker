@@ -59,7 +59,7 @@ public class Users {
         LocalDate dob= LocalDate.parse(dobString);
         db.createNewUser(firstName, lastName, email, contactNumber, personalNumber, address, dob);
         userList= db.listOfAllUsers();
-
+    System.out.println("New customer created. ");
     }
 
     public void deleteLastUser(){

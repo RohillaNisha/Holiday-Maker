@@ -20,10 +20,7 @@ class BookingTest {
             LocalDate.of(2023, 11, 1),
             LocalDate.of(2023, 11, 11),
             1,
-            2,
-            1500.0,
-            201,
-            1);
+            1500.0);
   }
 
   @Test
@@ -58,11 +55,6 @@ class BookingTest {
   }
 
   @Test
-  void testGetRoomID() {
-    assertEquals(1, booking.getRoomId());
-  }
-
-  @Test
   void testGetNoOfTravellers() {
     assertEquals(2, booking.getNoOfTravellers());
   }
@@ -70,15 +62,5 @@ class BookingTest {
   @Test
   void testGetNoOfTotalPrice() {
     assertEquals(1500.0, booking.getTotalPrice());
-  }
-
-  @Test
-  void testGetPackageId() {
-    assertEquals(201, booking.getPackageId());
-  }
-
-  @Test
-  void testGetEventId() {
-    assertEquals(1, booking.getEventId());
   }
 }

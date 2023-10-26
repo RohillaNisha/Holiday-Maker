@@ -6,12 +6,14 @@ public class Room {
     private int roomNumber;
     private String roomType;
     private double roomPrice;
+    private int roomCapacity;
 
-    public Room(int id, int roomNumber, String roomType, double roomPrice) {
+    public Room(int id, int roomNumber, String roomType, double roomPrice, int roomCapacity) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomPrice = roomPrice;
+        this.roomCapacity = roomCapacity;
     }
 
     public int getId() {
@@ -28,6 +30,10 @@ public class Room {
 
     public double getRoomPrice() {
         return roomPrice;
+    }
+
+    public int getRoomCapacity() {
+        return roomCapacity;
     }
 
     @Override

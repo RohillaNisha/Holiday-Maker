@@ -32,6 +32,11 @@ class UserTest {
 
     }
 
+    @Test
+    public void testGetPersonalNumber(){
+        Assertions.assertEquals(user.getPersonalNumber(), "RM4545");
+    }
+
 
 
 
