@@ -2,19 +2,16 @@ package org.example;
 
 import org.example.menu.MenuSystem;
 
-import javax.security.auth.callback.PasswordCallback;
-
 public class Main {
-    public static void main(String[] args) {
-        Database db = new Database();
-        Users users = new Users();
-        Events events=new Events();
-        Packages packages = new Packages();
+  public static void main(String[] args) {
 
-        MenuSystem menuSystem = MenuSystem.getInstance();
-        while (true) {
-            menuSystem.execute();
-        }
+    System.out.printf("--------------------------------%n");
+    System.out.printf("         HOLIDAY MAKER          %n");
+    System.out.printf("--------------------------------%n");
 
+    MenuSystem menuSystem = MenuSystem.getInstance();
+    while (true) {
+      menuSystem.execute();
     }
+  }
 }

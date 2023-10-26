@@ -3,6 +3,8 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,21 +24,22 @@ class DatabaseTest {
 
   @Mock Database mockDb;
   private Database db;
+  private InputStream originalSystemIn;
+  private ByteArrayInputStream simulatedSystemIn;
 
-  @BeforeEach
-  void setUp() {
-    db = new Database();
-  }
-
-  @AfterEach
-  void tearDown() {}
-
-  @Test
+  /* @Test
   void testCreateNewUserAndGetAllUsers() {
 
     db.createNewUser(
-        "test", "test", "test@test.com", "98741236", "TT4124", "Lund", LocalDate.of(1968, 06, 07));
-    ArrayList<User> users = db.listOfAllUsers();
+            "test",
+            "test",
+            "test@test.com",
+            "98741236",
+            "TT4124",
+            "Lund",
+            LocalDate.of(1968, 06, 07));
+
+    ArrayList<User> userList = db.listOfAllUsers();
 
     boolean newUserFound = false;
     for (User user : users) {
@@ -47,6 +50,64 @@ class DatabaseTest {
     }
 
     assertTrue(newUserFound, "User not found in the list");
+  }*/
+
+  @BeforeEach
+  void setUp() {
+    db = new Database();
+
+    originalSystemIn = System.in;
+  }
+
+  @AfterEach
+  void tearDown() {}
+
+  @Test
+  void testCreateNewUser() {
+    String firstName = "soraya";
+    String lastName = "Doe";
+    String email = "soraya.doe@example.com";
+    String contactNumber = "1234567890";
+    String personalNumber = "123456789";
+    String address = "123 Main St";
+    LocalDate dob = LocalDate.of(1990, 05, 15);
+
+    db.createNewUser(firstName, lastName, email, contactNumber, personalNumber, address, dob);
+    // hämta user från listan
+    List<User> userList = db.listOfAllUsers();
+
+    User createdUser = userList.get(userList.size() - 1);
+    assertEquals(firstName, createdUser.getFirstName());
+    assertEquals(lastName, createdUser.getLastName());
+    assertEquals(email, createdUser.getEmail());
+    assertEquals(contactNumber, createdUser.getContactNumber());
+    assertEquals(personalNumber, createdUser.getPersonalNumber());
+    assertEquals(address, createdUser.getAddress());
+    assertEquals(dob, createdUser.getDob());
+  }
+
+  @Test
+  public void testCreateAUser() {
+
+    String inputString =
+        "John\nDoe\njohn.doe@example.com\n1234567890\n123456789\n123 Main St\n1990-05-15";
+
+    simulatedSystemIn = new ByteArrayInputStream(inputString.getBytes());
+    System.setIn(simulatedSystemIn);
+
+    Users.createAUser();
+    System.setIn(originalSystemIn);
+
+    List<User> userList = db.listOfAllUsers();
+
+    User createdUser = userList.get(userList.size() - 1);
+    assertEquals("John", createdUser.getFirstName());
+    assertEquals("Doe", createdUser.getLastName());
+    assertEquals("john.doe@example.com", createdUser.getEmail());
+    assertEquals("1234567890", createdUser.getContactNumber());
+    assertEquals("123456789", createdUser.getPersonalNumber());
+    assertEquals("123 Main St", createdUser.getAddress());
+    assertEquals(LocalDate.of(1990, 5, 15), createdUser.getDob());
   }
 
   @Test
@@ -93,7 +154,7 @@ class DatabaseTest {
     List<Integer> eventIds = Arrays.asList(1, 2, 3);
 
     int bookingId =
-    db.createNewBooking(
+        db.createNewBooking(
             date, paid, userId, startDate, endDate, travelersNo, totalPrice, roomIds, eventIds);
 
     assertEquals(-1, bookingId);
@@ -206,7 +267,7 @@ class DatabaseTest {
   }
 
   @Test
-  void testListOfEventsByStartDate(){
+  void testListOfEventsByStartDate() {
     Date startDate = Date.valueOf("2023-11-11");
     Date endDate = Date.valueOf("2023-11-11");
 
@@ -214,9 +275,6 @@ class DatabaseTest {
 
     int eventsInEventsList = eventsList.size();
 
-    Assertions.assertEquals(1,eventsInEventsList);
-
+    Assertions.assertEquals(1, eventsInEventsList);
   }
-
-
 }

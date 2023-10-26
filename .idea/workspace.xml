@@ -5,20 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b1aebca-8bd5-4e5c-9eb5-0acd8515309f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/EventBookingProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/UserInteraction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/BookingServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/EventBookingProcessTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/booking/UserInteractionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Rooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Rooms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/booking/BookingProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/menu/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/example/DatabaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/DatabaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/UsersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/UsersTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +58,8 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
+        &quot;associatedIndex&quot;: 0
+        }</component>
   <component name="ProjectId" id="2XCzNjQfsKoOXEGhvADxJErJfVb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -82,11 +75,12 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "createYourOwnTrip",
-    "last_opened_file_path": "/Users/mukhtar/Desktop/Holiday-Maker1",
+    "git-widget-placeholder": "Merging createYourOwnTrip",
+    "last_opened_file_path": "/Users/mukhtar/Desktop/Holiday-Maker 2",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -193,6 +187,9 @@
       <option name="presentableId" value="Default" />
       <updated>1698147812403</updated>
       <workItem from="1698263223543" duration="4143000" />
+      <workItem from="1698302876252" duration="610000" />
+      <workItem from="1698303625583" duration="27000" />
+      <workItem from="1698304272102" duration="155000" />
     </task>
     <servers />
   </component>
