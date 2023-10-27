@@ -10,11 +10,14 @@ public class Package {
     private String packageType;
     private String packageName;
 
-    public Package (int packageId, String packageType, String packageName) {
-        this.packageId = packageId;
+    public Package (String packageType, String packageName) {
         this.packageType = packageType;
         this.packageName = packageName;
 
+    }
+
+    public void setPackageId(int packageId) {
+        this.packageId = packageId;
     }
 
     public int getPackageId() {

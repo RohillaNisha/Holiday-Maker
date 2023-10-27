@@ -376,32 +376,62 @@ public class Database {
     }
   }
 
-  public ArrayList<Package> listOfAllPackages() {
-    getAllPackages();
-    ArrayList<Package> packageList1 = new ArrayList<>();
+  public List<Package> getListOfAllPackages() {
+
+    List<Package> packageList = new ArrayList<>();
     try {
+      statement = conn.prepareStatement("SELECT * FROM packages");
+      resultSet = statement.executeQuery();
+
       while (resultSet.next()) {
-        packageList1.add(
+        packageList.add(
                 new Package(
-                        resultSet.getInt("packageId"),
                         resultSet.getString("packageType"),
                         resultSet.getString("packageName")));
       }
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-    return packageList1;
+    return packageList;
   }
 
-  private void getAllPackages() {
+  public List<Package> listOfPackagesByStartDate(Date startDate, Date endDate) {
+
+    List<Package> packageList = new ArrayList<>();
+
     try {
-      statement = conn.prepareStatement("SELECT * FROM packages");
+      statement =
+              conn.prepareStatement(" SELECT * FROM packageOccurrences WHERE startDate >= ? && endDate <= ?");
+      statement.setDate(1, startDate);
+      statement.setDate(2, endDate);
       resultSet = statement.executeQuery();
 
-    } catch (Exception ex) {
-      ex.printStackTrace();
+      while (resultSet.next()) {
+        Package packages = createPackageFromResultset(resultSet);
+        packageList.add(packages);
+      }
+      return packageList;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
     }
   }
+
+  public Package createPackageFromResultset(ResultSet resultSet )throws SQLException{
+    if(resultSet == null) {
+      return  null;
+    }
+    Package package =
+        new Package(
+            resultSet.getString("packageType"),
+            resultSet.getString("packageName"));
+
+    package.setPackageId(resultSet.getInt(201));
+
+    return package;
+  }
+
 
   public Package fetchedPackageByPackageType(String packageType) {
     getPackageByPackageType(packageType);
@@ -410,7 +440,6 @@ public class Database {
       if (resultSet.next()) {
         fetchedPackage =
                 new Package(
-                        resultSet.getInt("packageId"),
                         resultSet.getString("packageType"),
                         resultSet.getString("packageName"));
         return fetchedPackage;
@@ -440,7 +469,6 @@ public class Database {
       if (resultSet.next()) {
         fetchedPackage =
                 new Package(
-                        resultSet.getInt("packageId"),
                         resultSet.getString("packageType"),
                         resultSet.getString("packageName"));
         return fetchedPackage;

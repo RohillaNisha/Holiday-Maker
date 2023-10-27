@@ -24,6 +24,10 @@ public class BookingService {
   public List<Event> searchEventsByDate(LocalDate startDate, LocalDate endDate) {
     return database.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
   }
+  public List<Package> searchPackagesByDate(LocalDate startDate, LocalDate endDate) {
+    return database.listOfEventsByStartDate(Date.valueOf(startDate), Date.valueOf(endDate));
+  }
+
 
   public List<Event> selectEvents(List<Event> availableEvents, String eventSelection) {
     String[] eventIds = eventSelection.split(",");
@@ -45,6 +49,7 @@ public class BookingService {
     return database.listOfAllRooms();
   }
 
+
   public List<Room> selectRooms(List<Room> availableRooms, String roomSelection) {
 
     String[] roomIds = roomSelection.split(",");
@@ -59,6 +64,7 @@ public class BookingService {
     }
     return selectedRooms;
   }
+
 
   public double calculateTotalPrice(
       List<Event> selectedEvents, List<Room> selectedRooms, int noOfTravelers) {

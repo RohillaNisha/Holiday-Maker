@@ -22,9 +22,10 @@ public class MainMenu extends Menu{
         List.of(
             new MenuOption(1, "Create a new Customer", Users::createAUser),
             new MenuOption(2, "Create your own trip", eventBookingProcess::createABooking),
-            new MenuOption(3, "Find A Booking", bookingProcess::findABooking),
-            new MenuOption(4, "Change paid status", bookingProcess::changePaidStatus),
-            new MenuOption(5, "Exit", () -> System.exit(0)));
+            //new MenuOption(3,"Book a package", packageBookingProcess::createAPackageBooking),
+            new MenuOption(4, "Find A Booking", bookingProcess::findABooking),
+            new MenuOption(5, "Change paid status", bookingProcess::changePaidStatus),
+            new MenuOption(6, "Exit", () -> System.exit(0)));
     }
 
 
